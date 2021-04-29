@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+
+    <string name="address">Street Address</string>
+    <string name="alert_title">WARNING</string>
+    <string name="alert_message">If you do not accept the End-User Licence Agreement you will not be
+        able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
+        exit the application.</string>
+    <string name="button_add_address">Add Address</string>
+    <string name="btn_accept">Accept</string>
+    <string name="btn_reject">Reject</string>
+    <string name="confirm">Confirm</string>
+    <string name="city">City</string>
+    <string name="eula_acceptance">Loading</string>
+    <string name="loading">Loading</string>
+    <string name="return_to_application">Return to application</string>
+    <string name="search_address"><u>Search Address</u></string>
+    <string name="title">Home Evaluator</string>
+    <string name="zip">Zip Code</string>
+
+    <string-array name="statesArray">
+        <item>Select State</item>
+        <item>Alabama</item>
+        <item>Alaska</item>
+        <item>Arizona</item>
+        <item>Arkansas</item>
+        <item>California</item>
+        <item>Colorado</item>
+        <item>Connecticut</item>
+        <item>Delaware</item>
+        <item>Florida</item>
+        <item>Georgia</item>
+        <item>Hawaii</item>
+        <item>Idaho</item>
+        <item>Illinois</item>
+        <item>Indiana</item>
+        <item>Iowa</item>
+        <item>Kansas</item>
+        <item>Kentucky</item>
+        <item>Louisiana</item>
+        <item>Maine</item>
+        <item>Maryland</item>
+        <item>Massachusetts</item>
+        <item>Michigan</item>
+        <item>Minnesota</item>
+        <item>Mississippi</item>
+        <item>Missouri</item>
+        <item>MontanaNebraska</item>
+        <item>Nevada</item>
+        <item>New Hampshire</item>
+        <item>New Jersey</item>
+        <item>New Mexico</item>
+        <item>New York</item>
+        <item>North Carolina</item>
+        <item>North Dakota</item>
+        <item>Ohio</item>
+        <item>Oklahoma</item>
+        <item>Oregon</item>
+        <item>Pennsylvania</item>
+        <item>Rhode Island</item>
+        <item>South Carolina</item>
+        <item>South Dakota</item>
+        <item>Tennessee</item>
+        <item>Texas</item>
+        <item>Utah</item>
+        <item>Vermont</item>
+        <item>Virginia</item>
+        <item>Washington</item>
+        <item>West Virginia</item>
+        <item>Wisconsin</item>
+        <item>Wyoming</item>
+    </string-array>
+
+    <string name="end_user_license_agreement">
+        Note: This is not a real, legally binding agreement. This agreement is a mock agreement made for educational purposes. Agreement or rejection of this agreement does not bear any legal consequence to the user. Content of this agreement was sourced from https://www.telerik.com/purchase/license-agreement/testing-framework-lw-s.
+         \n\n<b><i>IMPORTANT – PLEASE READ THIS END USER LICENSE AGREEMENT (THE \"AGREEMENT\") CAREFULLY BEFORE ATTEMPTING TO DOWNLOAD OR USE ANY SOFTWARE, DOCUMENTATION, OR OTHER MATERIALS MADE AVAILABLE THROUGH THIS APPLICATION.
+            THIS AGREEMENT CONSTITUTES A LEGALLY BINDING AGREEMENT BETWEEN YOU OR THE COMPANY WHICH YOU REPRESENT AND ARE AUTHORIZED TO BIND (THE \"LICENSEE\", \"YOU\", or \"YOUR\"), AND MCP Technologies INC (\"MCP Technologies\" OR \"LICENSOR\").  PLEASE CHECK THE \"I HAVE READ AND AGREE TO THE LICENSE AGREEMENT\" BOX AT THE BOTTOM OF THIS AGREEMENT IF YOU AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS AGREEMENT.  BY CHECKING THE \"I HAVE READ AND AGREE TO THE LICENSE AGREEMENT\" BOX AND/OR BY PURCHASING, DOWNLOADING, INSTALLING OR OTHERWISE USING THE SOFTWARE MADE AVAILABLE BY MCP Technologies THROUGH THIS WEB SITE, YOU ACKNOWLEDGE (1) THAT YOU HAVE READ THIS AGREEMENT, (2) THAT YOU UNDERSTAND IT, (3) THAT YOU AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS, AND (4) TO THE EXTENT YOU ARE ENTERING INTO THIS AGREEMENT ON BEHALF OF A COMPANY, YOU HAVE THE POWER AND AUTHORITY TO BIND THAT COMPANY.</i>\n\n1.Software License</b>
+        \n1.1 License Grant.  Subject to the terms and conditions set forth in this Agreement, MCP Technologies hereby grants to Licensee and Licensee hereby accepts, a limited, non-transferable, non-exclusive license (the \"License\") to use the MCP Technologies computer software identified as Progress Testing Framework by Progress and any updates, upgrades, modifications and error corrections thereto provided to Licensee (collectively, the \"Programs\") and any accompanying documentation (the \"Documentation\", together with the Programs, collectively the \"Software\") solely as specified in this Agreement.
+        \n1.2 Scope of Use.  The Software is licensed per machine. This means the Software may not be activated nor running at the same time on different computers or virtual machines. The computer on which the Software is installed can be used by multiple users as long as only one (1) user is using the computer at a given time.
+        \n\n<b>2. Commercial License Grant</b>
+        \nLicensor hereby grants to Licensee and Licensee hereby accepts, a limited, non-transferable, non-exclusive license to install and use the Software in executable, object code form only.
+        \n\n<b>3. Software Activation, Use of Data, License Metering</b>
+        \n3.1 Software Activation.  In order to protect against unlicensed or illegal use of the Software and to improve customer service, the Software may use your internal network and internet connection for the purpose of transmitting and validating license-related data at the time of installation, registration or update to a license server. Activation is based on the exchange of license related data between your computer and a MCP Technologies server. You agree that MCP Technologies and its licensors may use these measures and You agree to follow any applicable requirements.
+        \n3.2 Use of Data.  By Your acceptance of the terms of this License or use of the Software, You authorize the collection, use and disclosure of information collected by MCP Technologies for the purposes provided for in this License as revised from time to time. International users understand and consent to the processing of personal information in the United States for the purposes described herein. MCP Technologies has the right in its sole discretion to amend this provision of the Agreement and/or Privacy Policy at any time.
+        \n3.3 Activation Checks. Communication with external servers.  From time to time the Software will communicate with the MCP Technologies server to ensure the software is properly activated. The Software may also communicate with external servers for the purposes of maintenance of quality of the service, trends identification and usage statistics. You agree that the Software may use your internal network and internet connection for the above purposes.
+        \n3.4 Moving Software.  If You wish to move the Software to a different computer, You must first deactivate the Software on the computer where it is currently in use. Only then You can activate the Software on another computer. If You do not have an internet connection, You can use the manual de-activation option.
+        \n3.5 Archival Copies.  You may make one archival (backup) copy of the Software. The archival copy may not be used or installed as long as another copy of the Software is installed on any computer.
+        \n3.6 Prior Versions.  Prior versions of the Software may be installed on the same computer with a properly licensed current version of Software. A prior version may be used by a properly licensed user in place of the current version of the Software. The prior version is not an additional license of the Software; it may be used only as a substitute for the current version.
+        \n\n<b>4. License Limitations</b>
+        \n4.1 You may not copy (except as expressly permitted in this Agreement), modify, alter, merge, adapt or translate the Software, or decompile, reverse engineer, disassemble, or otherwise reduce the Software to a human-perceivable form.
+        \n4.2 You may not modify the Software or create derivative works based upon the Software.
+        \n4.3 You may not redistribute the Software.
+        \n4.4 You may not rent, lease, or sublicense or permit the use of the Software on a timeshare or service bureau basis. You may not host, on a subscription basis or otherwise, the Software to permit a third party to use the Software for any reason.
+        \n4.5 You may not use the MCP Technologies product names, logos or trademarks to market Your software.
+        \n\n<b>5. Delivery</b>
+        \nMCP Technologies shall make available for download to Licensee a master copy of the Software.
+        \n\n<b>6. Term and Termination</b>
+        \nThis Agreement and the License granted hereunder shall continue until terminated in accordance with this Section. Unless otherwise specified in this Agreement, the License granted is perpetual and shall last as long as You use the Software in compliance with the terms herein. Unless otherwise prohibited by law, and without prejudice to MCP Technologies\'s other rights or remedies, MCP Technologies shall have the right to terminate this Agreement and the License granted hereunder immediately if You breach any of the material terms of this Agreement, and You fail to cure such material breach within thirty (30) days of receipt of notice from MCP Technologies.  Upon termination of this Agreement, all Licenses granted to You hereunder shall terminate automatically and You shall immediately cease use of the Software.  You must also destroy (i) all copies of the Software and (ii) any product and company logos provided by MCP Technologies in connection with this Agreement.
+        \n\n<b>7. Product Discontinuance</b>
+        \nMCP Technologies reserves the right to discontinue the Software or any component of the Software, whether offered as a standalone product or solely as a component, at any time.
+        \n\n<b>8. Intellectual Property</b>
+        \nAll title and ownership rights in and to the Software (including but not limited to any images, photographs, animations, video, audio, music, text embedded in the Software), the intellectual property embodied in the Software, and any trademarks or service marks of MCP Technologies that are used in connection with the Software are and shall at all times remain exclusively owned by MCP Technologies and its licensors.  All title and intellectual property rights in and to the content that may be accessed through use of the Software is the property of the respective content owner and may be protected by applicable copyright or other intellectual property laws and treaties.  This Agreement grants You no rights to use such content. The Software may contain or be accompanied by certain third party components which are subject to additional restrictions.  These components, if any, are identified in, and subject to, special license terms and conditions set forth in the \"readme.txt\" file.
+        \n\n<b>9. Limited Warranty</b>
+        \nMCP Technologies warrants solely that the Software will perform substantially in accordance with the accompanying written materials for a period of ninety (90) days after the date on which You license the Software. MCP Technologies does not warrant the use of the Software will be uninterrupted or error free at all times and in all circumstances, nor that program errors will be corrected.  This limited warranty shall not apply to any error or failure resulting from (i) machine error, (ii) Licensee\'s failure to follow operating instructions, (iii) negligence or accident, or (iv) modifications to the Software by any person or entity other than MCP Technologies.  In the event of a breach of warranty, Licensee\'s sole and exclusive remedy and MCP Technologies\'s sole and exclusive obligation, is repair of all or any portion of the Software.  This limited warranty is only valid if MCP Technologies receives written notice of breach of warranty no later than thirty (30) days after the warranty period expires.  EXCEPT FOR THE EXPRESS WARRANTIES SET FORTH IN THIS SECTION 9, MCP Technologies DISCLAIMS ALL OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+        \n\n<b>10. Limitation of Liability</b>
+        \n\nTo the maximum extent permitted by applicable law, in no event will MCP Technologies be liable for any indirect, special, incidental, or consequential damages arising out of the use of or inability to use the Software, including, without limitation, damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other commercial damages or losses, even if advised of the possibility thereof, and regardless of the legal or equitable theory (contract, tort or otherwise) upon which the claim is based.  In any case, MCP Technologies\'s entire liability under any provision of this agreement shall not exceed $5, notwithstanding any failure of essential purpose of any limited remedy.  Some jurisdictions do not allow the exclusion or limitation of incidental or consequential damages, so this exclusion and limitation may not be applicable.  MCP Technologies is not responsible for any liability arising out of content provided by Licensee or a third party that is accessed through the Software and/or any material linked through such content.  Any data included in the Software upon shipment from MCP Technologies is for testing use only and MCP Technologies hereby disclaims any and all liability arising therefrom.  The extent of MCP Technologies\'s liability for the limited warranty section shall be as set forth therein.
+        \n\n<b>11. Indemnity</b>
+        \nYou agree to indemnify, hold harmless, and defend MCP Technologies and its resellers from and against any and all claims, lawsuits and proceedings (collectively \"Claims\"), and all expenses, costs (including attorney\'s fees), judgments, damages and other liabilities resulting from such Claims, that arise or result from Your use or misuse of the Software.
+        \n\n<b>12. Confidentiality</b>
+        \nExcept as otherwise provided herein, each party expressly undertakes to retain in confidence all information and know-how transmitted or disclosed to the other that the disclosing party has identified as being proprietary and/or confidential or that, by the nature of the circumstances surrounding the disclosure, ought in good faith to be treated as proprietary and/or confidential, and expressly undertakes to make no use of such information and know-how except under the terms and during the existence of this Agreement.  However, neither party shall have an obligation to maintain the confidentiality of information that (i) it received rightfully from a third party without an obligation to maintain such information in confidence ; (ii) the disclosing party has disclosed to a third party without any obligation to maintain such information in confidence; (iii) was known to the receiving party prior to its disclosure by the disclosing party hereunder; or (iv) is independently developed by or for the receiving party without use of the confidential information of the disclosing party.  Further, either party may disclose confidential information of the other party as required by governmental or judicial order, provided such party gives the other party prompt written notice prior to such disclosure and complies with any protective order (or equivalent) imposed on such disclosure.  Without limiting the foregoing, Licensee shall treat any source code for the Software as confidential information and shall not disclose, disseminate, or distribute such materials to any third party without MCP Technologies\'s prior written permission.  Each party\'s obligations under this Section 12 shall apply at all times during the term of this Agreement and for five (5) years following termination of this Agreement, provided, however, that (i) obligations with respect to source code shall survive in perpetuity and (ii) trade secrets shall be maintained as such until they fall into the public domain.
+        \n\n<b>13. Governing Law</b>
+        \nThis License will be governed by the law of Connecticut, U.S.A., without regard to the conflict of laws principles thereof.  If any dispute, controversy, or claim cannot be resolved by a good faith discussion between the parties, then it shall be submitted for resolution to a state or Federal court of competent jurisdiction in Hartford, Connecticut, USA, and the parties hereby agree to submit to the jurisdiction and venue of such court. The Uniform Computer Information Transactions Act and the United Nations Convention on the International Sale of Goods shall not apply to this Agreement.  If any provision of this Agreement is to be held unenforceable, such holding will not affect the validity of the other provisions hereof.  Failure of a party to enforce any provision of this Agreement shall not constitute or be construed as a waiver of such provision or of the right to enforce such provision.
+        \n\n<b>14. Entire Agreement</b>
+        \nThis Agreement shall constitute the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior and contemporaneous communications regarding the subject matter hereof.  Use of any purchase order or other Licensee document in connection herewith shall be for administrative convenience only and all terms and conditions stated therein shall be void and of no effect unless otherwise agreed to in writing by both parties.
+        \n\n<b>15. No Assignment</b>
+        \nYou may not assign, sublicense, sub-contract, or otherwise transfer this Agreement, or any rights or obligations under it, without MCP Technologies\'s prior written consent.
+        \n\n<b>16. Survival</b>
+        \nAny provisions of the Agreement containing license restrictions, warranties and warranty disclaimers, confidentiality obligations, limitations of liability and/or indemnity terms, and any provision of the Agreement which, by its nature, is intended to survive shall remain in effect following any termination or expiration of the Agreement.
+        \n\n<b>17. Severability</b>
+        \nIf a particular provision of this Agreement is terminated or held by a court of competent jurisdiction to be invalid, illegal, or unenforceable, this Agreement shall remain in full force and effect as to the remaining provisions.
+        \n\n<b>18. Force Majeure</b>
+        \nNeither party shall be deemed in default of this Agreement if failure or delay in performance is caused by an act of God, fire, flood, severe weather conditions, material shortage or unavailability of transportation, government ordinance, laws, regulations or restrictions, war or civil disorder, or any other cause beyond the reasonable control of such party.
+        \n\n<b>19. Export Classifications</b>
+        \nYou specifically agree not to export, re-export, or transfer the Software to any country in violation of U.S. export laws or regulations.  You expressly agree not to export or re-export MCP Technologies Software to any country, person, entity or end user subject to U.S. export restrictions. You specifically agree not to export, re-export, or transfer the Software to any country to which the U.S. has embargoed or restricted the export of goods or services, or to any national of any such country, wherever located, who intends to transmit or transport the products back to such country, or to any person or entity who has been prohibited from participating in U.S. export transactions by any federal agency of the U.S. government. You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied Your export privileges.
+        \nYOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS AGREEMENT&amp; S TERMS AND CONDITIONS.  YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN MCP TECHNOLOGIES AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.
+    </string>
+</resources>
