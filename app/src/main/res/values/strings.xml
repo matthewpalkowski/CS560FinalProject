@@ -6,19 +6,18 @@
     <string name="alert_message">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string>
-    <string name="button_add_address">Add Address</string>
     <string name="btn_accept">Accept</string>
+    <string name="btn_search_address"><u>Search</u></string>
     <string name="btn_reject">Reject</string>
     <string name="confirm">Confirm</string>
     <string name="city">City</string>
     <string name="eula_acceptance">Loading</string>
     <string name="loading">Loading</string>
     <string name="return_to_application">Return to application</string>
-    <string name="search_address"><u>Search Address</u></string>
     <string name="title">Home Evaluator</string>
     <string name="zip">Zip Code</string>
 
-    <string-array name="statesArray">
+    <string-array name="states_array">
         <item>Select State</item>
         <item>Alabama</item>
         <item>Alaska</item>
@@ -45,7 +44,8 @@
         <item>Minnesota</item>
         <item>Mississippi</item>
         <item>Missouri</item>
-        <item>MontanaNebraska</item>
+        <item>Montana</item>
+        <item>Nebraska</item>
         <item>Nevada</item>
         <item>New Hampshire</item>
         <item>New Jersey</item>

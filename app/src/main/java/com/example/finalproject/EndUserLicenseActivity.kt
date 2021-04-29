@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.system.exitProcess
 
 class EndUserLicenseActivity : AppCompatActivity() {
 
@@ -28,9 +27,9 @@ class EndUserLicenseActivity : AppCompatActivity() {
 
         eulaTextView = findViewById(R.id.txtEULA)
         eulaTextView.movementMethod = ScrollingMovementMethod()
-        eulaTextView.setOnScrollChangeListener(scrollListener())
+        eulaTextView.setOnScrollChangeListener(ScrollListener())
 
-        onClickListener = buttonListener()
+        onClickListener = ButtonListener()
 
         btnAccept = findViewById(R.id.btnAccept)
         btnAccept.setOnClickListener(onClickListener)
@@ -49,13 +48,13 @@ class EndUserLicenseActivity : AppCompatActivity() {
         builder.setNegativeButton(getString(R.string.confirm)){
             _: DialogInterface, _: Int ->
             setResult(Activity.RESULT_CANCELED)
-            finish()
+            finishAffinity()
         }
         val dialog = builder.create()
         dialog.show()
     }
 
-    inner class buttonListener : View.OnClickListener{
+    inner class ButtonListener : View.OnClickListener{
         override fun onClick(v: View?) {
             if(v!!.equals(findViewById(R.id.btnAccept))){
                 val editor = getPreferences(MODE_PRIVATE).edit()
@@ -70,11 +69,13 @@ class EndUserLicenseActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    inner class scrollListener : View.OnScrollChangeListener{
+    inner class ScrollListener : View.OnScrollChangeListener{
         override fun onScrollChange(v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int){
             if (!v!!.canScrollVertically(1)) {
-                findViewById<Button>(R.id.btnAccept).isEnabled = true
-                findViewById<Button>(R.id.btnReject).isEnabled = true
+                btnAccept.isEnabled = true
+                btnAccept.setBackgroundColor(getColor(R.color.blue))
+                btnReject.isEnabled = true
+                btnReject.setBackgroundColor(getColor(R.color.blue))
             }
         }
 

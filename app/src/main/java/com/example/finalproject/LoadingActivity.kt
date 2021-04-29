@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import kotlin.system.exitProcess
 
 class LoadingActivity : AppCompatActivity() {
 
@@ -49,10 +48,7 @@ class LoadingActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(resultCode == Activity.RESULT_CANCELED) {
-            exitProcess(-1)
-            finish()
-        }
+        if(resultCode == Activity.RESULT_CANCELED) finishAffinity()
         if(resultCode == Activity.RESULT_OK) start()
     }
 }
