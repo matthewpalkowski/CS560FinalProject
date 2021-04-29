@@ -3,6 +3,7 @@ package com.example.finalproject
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
@@ -51,19 +52,13 @@ class ManualSearchActivity : AppCompatActivity() {
     *
     */
 
-    private lateinit var stateSpinner: Spinner
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
-        stateSpinner = findViewById(R.id.spnrStateSpinner)
-        //stateSpinner.onItemClickListener = ItemClickListener()
-
+        findViewById<Spinner>(R.id.spnrStateSpinner).setOnTouchListener(SpinnerListener())
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(ButtonListener())
-        //FIXME FAILING -- NEED TO HIDE KEYBOARD
-
     }
 
     private fun View.hideKeyboard(){
@@ -71,9 +66,10 @@ class ManualSearchActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    inner class ItemClickListener : AdapterView.OnItemClickListener {
-        override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            view!!.hideKeyboard()
+    inner class SpinnerListener : View.OnTouchListener {
+        override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+            v!!.hideKeyboard()
+            return false
         }
     }
 
