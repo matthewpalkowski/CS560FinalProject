@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SavedFavorites">
+    tools:context=".SavedAddresses">
 
     <TextView
         android:id="@+id/txtSaveAddresses"
@@ -41,6 +41,7 @@
         app:srcCompat="@drawable/app_icon" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSavedAddress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="125dp"
@@ -48,6 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSaveAddresses" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSaveAddresses"
+        tools:listitem="@layout/saved_address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
