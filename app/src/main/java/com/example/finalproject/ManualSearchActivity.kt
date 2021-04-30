@@ -1,16 +1,13 @@
 package com.example.finalproject
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
-import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author Matthew Palkowski
@@ -26,19 +23,12 @@ class ManualSearchActivity : AppCompatActivity() {
      * -Ability to save addresses to favorites
      */
 
-    /*TODO Activities
-    *  -Loading Screen
-    *  -End-user Licence Agreement
-    *  -EnterAddress/Entry Form
-    *  -Results
-    */
-
     /*TODO Requirements (8pts total needed)
-    *  Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
+    *  !DONE! Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
     *  Use of an Android service that requires permissions (gps to grab current loc.) 1pt
-    *  Use of three or more Activities (3 activities see Activities) 1 pt
-    *  Use of Async tasks (API Calls done async) 1 pt
-    *  Use of RecyclerView with custom adapter and layout (addresses) 1pt
+    *  !DONE! Use of three or more Activities (3 activities see Activities) 1 pt
+    *  Use of Async tasks (TBD) 1 pt
+    *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
     *  Use ViewModel (use fragments and view model within results) 1pt
     *  Use of SQLite database or Room Database or Remote Database Firebase (Maybe download FEMA data) 2 pt
     *  Use of a RESTful HTTP API (API calls) 2 pt
@@ -48,17 +38,35 @@ class ManualSearchActivity : AppCompatActivity() {
     /* FIXME APIs to Connect to
     *   (Air Quality) https://openaq.org/#/countries/US
     *   ----------
-    *   Need to fix padding on the TextInputs
-    *
     */
+
+    /*FIXME - MISC
+     *  Need to fix padding on the TextInputs
+     * */
+
+    private lateinit var spinnerState : Spinner
+    private lateinit var txtCity : EditText
+    private lateinit var txtStreetAddress : EditText
+    private lateinit var txtZip : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
-        findViewById<Spinner>(R.id.spnrStateSpinner).setOnTouchListener(SpinnerListener())
+        spinnerState = findViewById(R.id.spnrStateSpinner)
+        spinnerState.setOnTouchListener(SpinnerListener())
+
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(ButtonListener())
+
+        txtCity = findViewById(R.id.txtInputCity)
+        txtStreetAddress = findViewById(R.id.txtInputStreetAddress)
+        txtZip = findViewById(R.id.txtInputZipCode)
+    }
+
+    private fun validInput() : Boolean {
+        //TODO implement
+        return true
     }
 
     private fun View.hideKeyboard(){
@@ -75,7 +83,10 @@ class ManualSearchActivity : AppCompatActivity() {
 
     inner class ButtonListener : View.OnClickListener {
         override fun onClick(v: View?) {
+            if(validInput()){}
             //TODO Add all the API functionality
+
+            //TODO Check that all required fields are filled out
         }
     }
 }

@@ -60,7 +60,7 @@ class EndUserLicenseActivity : AppCompatActivity() {
                 val editor = getPreferences(MODE_PRIVATE).edit()
                 editor.putBoolean(getString(R.string.eula_acceptance),true)
                 setResult(Activity.RESULT_OK)
-                finish()
+                finishAndRemoveTask()
             }
 
             if(v == findViewById(R.id.btnReject)) generateDialog()
@@ -78,6 +78,5 @@ class EndUserLicenseActivity : AppCompatActivity() {
                 btnReject.setBackgroundColor(getColor(R.color.blue))
             }
         }
-
     }
 }
