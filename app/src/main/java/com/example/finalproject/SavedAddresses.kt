@@ -2,6 +2,8 @@ package com.example.finalproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -18,11 +20,9 @@ class SavedAddresses : AppCompatActivity() {
         setContentView(R.layout.activity_saved_addresses)
 
         adapter = SavedAddressAdapter(savedAddresses)
+
         recycler = findViewById(R.id.recyclerSavedAddress)
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(this)
     }
-
-    /* TODO add onPress and onLongPress listeners to create intent to go to a SearchResult page
-         with all the details for the selected item*/
 }

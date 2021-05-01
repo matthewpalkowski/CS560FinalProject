@@ -31,6 +31,8 @@ class SavedAddressAdapter(private val addressList : List<SavedAddressItem>) :
         holder.txtState.text = currentItem.address.state
         holder.txtZip.text = currentItem.address.zipCode
         holder.imgAddressThumbnail
+        holder.itemView.setOnClickListener(ShortPressListener())
+        holder.itemView.setOnLongClickListener(LongPressListener())
 
         if(!currentItem.imgURL.isNullOrBlank())
             Picasso.get().load(currentItem.imgURL).into(holder.imgAddressThumbnail)
@@ -39,4 +41,22 @@ class SavedAddressAdapter(private val addressList : List<SavedAddressItem>) :
 
     override fun getItemCount(): Int { return addressList.size}
 
+
+    private fun OpenItem(v: View?) {
+        //TODO implement creation of intent to go to SearchResult with data from the selected item
+    }
+
+    inner class ShortPressListener : View.OnClickListener {
+        override fun onClick(v: View?) {
+            OpenItem(v)
+        }
+    }
+
+    //TODO confirm if this is needed in combination with OnClick
+    inner class LongPressListener : View.OnLongClickListener {
+        override fun onLongClick(v: View?): Boolean {
+            OpenItem(v)
+            return false
+        }
+    }
 }

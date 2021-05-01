@@ -139,7 +139,7 @@ class ManualSearchActivity : AppCompatActivity() {
 
     inner class ButtonListener : View.OnClickListener {
         override fun onClick(v: View?) {
-            var valid : Boolean = true
+            var valid = true
             if(!validAddress()) valid = false
             if(!validCity()) valid = false
             if(!validZip()) valid = false
