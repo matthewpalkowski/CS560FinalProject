@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import com.google.android.material.textfield.TextInputEditText
 
 /**
  * @author Matthew Palkowski
@@ -42,12 +43,22 @@ class ManualSearchActivity : AppCompatActivity() {
 
     /*FIXME - MISC
      *  Need to fix padding on the TextInputs
-     * */
+     */
+
+    /*TODO - Major Components
+     *  -Set up Database on SQLlite or Firebase
+     *      -Uses
+     *          -Saving of favorites to account for persistence across phones
+     *          -Storage of static data sets that can't be accessed via API
+     *              -Which data sets?
+     *  -Write API connections
+     *  Implement Landscape modes and use fragments and ViewModel to support it
+     */
 
     private lateinit var spinnerState : Spinner
-    private lateinit var txtCity : EditText
-    private lateinit var txtStreetAddress : EditText
-    private lateinit var txtZip : EditText
+    private lateinit var txtCity : TextInputEditText
+    private lateinit var txtStreetAddress : TextInputEditText
+    private lateinit var txtZip : TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +76,9 @@ class ManualSearchActivity : AppCompatActivity() {
     }
 
     private fun validInput() : Boolean {
-        //TODO implement
+        /*TODO implement
+        *   -set errors for textInputViews when nothing is entered
+        * */
         return true
     }
 
@@ -85,8 +98,6 @@ class ManualSearchActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             if(validInput()){}
             //TODO Add all the API functionality
-
-            //TODO Check that all required fields are filled out
         }
     }
 }
