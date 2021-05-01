@@ -1,14 +1,16 @@
 package com.example.finalproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+
 
 /**
  * @author Matthew Palkowski
@@ -56,30 +58,71 @@ class ManualSearchActivity : AppCompatActivity() {
      */
 
     private lateinit var spinnerState : Spinner
-    private lateinit var txtCity : TextInputEditText
-    private lateinit var txtStreetAddress : TextInputEditText
-    private lateinit var txtZip : TextInputEditText
+
+    private lateinit var txtLayoutCity : TextInputLayout
+    private lateinit var txtLayoutStreetAddress : TextInputLayout
+    private lateinit var txtLayoutZip : TextInputLayout
+
+    private lateinit var txtInputCity : TextInputEditText
+    private lateinit var txtInputStreet : TextInputEditText
+    private lateinit var txtInputZip : TextInputEditText
+
+    private lateinit var touchListener : TouchListener
+    private lateinit var focusListener: OnFocusListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
-        spinnerState = findViewById(R.id.spnrStateSpinner)
-        spinnerState.setOnTouchListener(SpinnerListener())
-
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(ButtonListener())
 
-        txtCity = findViewById(R.id.txtInputCity)
-        txtStreetAddress = findViewById(R.id.txtInputStreetAddress)
-        txtZip = findViewById(R.id.txtInputZipCode)
+        touchListener = TouchListener()
+        focusListener = OnFocusListener()
+
+        txtInputCity = findViewById(R.id.inputEditTxtCity)
+        txtInputStreet = findViewById(R.id.inputEditTxtStreetAddress)
+        txtInputZip = findViewById(R.id.inputEditTxtZip)
+
+        spinnerState = findViewById(R.id.spnrStateSpinner)
+        spinnerState.setOnTouchListener(touchListener)
+
+        txtLayoutCity = findViewById(R.id.txtInputCity)
+        txtLayoutCity.onFocusChangeListener = focusListener
+
+        txtLayoutStreetAddress = findViewById(R.id.txtInputStreetAddress)
+        txtLayoutStreetAddress.onFocusChangeListener = focusListener
+
+        txtLayoutZip = findViewById(R.id.txtInputZipCode)
+        txtLayoutZip.onFocusChangeListener = (focusListener)
     }
 
-    private fun validInput() : Boolean {
-        /*TODO implement
-        *   -set errors for textInputViews when nothing is entered
-        * */
-        return true
+    private fun validAddress() : Boolean {
+        return if(txtInputStreet.length() == 0) {
+            txtLayoutStreetAddress.error = getString(R.string.missing_street)
+            false
+        } else true
+    }
+
+    private fun validCity() : Boolean {
+        return if(txtInputCity.length() == 0) {
+            txtLayoutCity.error = getString(R.string.missing_city)
+            false
+        } else true
+    }
+
+    private fun validState(): Boolean {
+        return if (spinnerState.selectedItem.toString() == resources.getStringArray(R.array.states_array)[0]) {
+            (spinnerState.getSelectedView() as TextView).error = getString(R.string.missing_state)
+            false
+        } else true
+    }
+
+    private fun validZip() : Boolean{
+        return if(txtInputZip.length() == 0) {
+            txtLayoutZip.error = getString(R.string.missing_zip)
+            false
+        } else true
     }
 
     private fun View.hideKeyboard(){
@@ -87,7 +130,7 @@ class ManualSearchActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    inner class SpinnerListener : View.OnTouchListener {
+    inner class TouchListener : View.OnTouchListener {
         override fun onTouch(v: View?, event: MotionEvent?): Boolean {
             v!!.hideKeyboard()
             return false
@@ -96,8 +139,20 @@ class ManualSearchActivity : AppCompatActivity() {
 
     inner class ButtonListener : View.OnClickListener {
         override fun onClick(v: View?) {
-            if(validInput()){}
-            //TODO Add all the API functionality
+            var valid : Boolean = true
+            if(!validAddress()) valid = false
+            if(!validCity()) valid = false
+            if(!validZip()) valid = false
+            if(!validState()) valid = false
+            if(valid){
+                //TODO Add all the API functionality
+            }
+        }
+    }
+
+    inner class OnFocusListener : View.OnFocusChangeListener {
+        override fun onFocusChange(v: View?, hasFocus: Boolean) {
+            TODO("Not yet implemented")
         }
     }
 }

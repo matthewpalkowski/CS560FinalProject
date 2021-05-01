@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtSearchAddress">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/frameStreetAddress"
+            android:id="@+id/inputEditTxtStreetAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/address" />
@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtInputStreetAddress">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/frameCity"
+            android:id="@+id/inputEditTxtCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/city" />
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toTopOf="@+id/txtInputCity">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/frameZip"
+            android:id="@+id/inputEditTxtZip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/zip" />
