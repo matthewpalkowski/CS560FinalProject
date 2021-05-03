@@ -1,5 +1,12 @@
 package com.example.finalproject
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -8,6 +15,7 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -57,6 +65,11 @@ class ManualSearchActivity : AppCompatActivity() {
      *  Implement Landscape modes and use fragments and ViewModel to support it
      */
 
+    private val GPS : String = "gps"
+    private val UPDATE_TIME : Long = 5000
+    private val UPDATE_DIST : Float = 100F
+    private val REQUEST_CODE : Int = 10
+
     private lateinit var spinnerState : Spinner
 
     private lateinit var txtLayoutCity : TextInputLayout
@@ -75,26 +88,64 @@ class ManualSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
-        findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(ButtonListener())
+        val buttonListener = ButtonListener()
+        findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(buttonListener)
+        findViewById<Button>(R.id.btnCurrentAddressSearch).setOnClickListener(buttonListener)
 
         touchListener = TouchListener()
         focusListener = OnFocusListener()
 
         txtInputCity = findViewById(R.id.inputEditTxtCity)
+        txtInputCity.onFocusChangeListener = focusListener
+
         txtInputStreet = findViewById(R.id.inputEditTxtStreetAddress)
+        txtInputStreet.onFocusChangeListener = focusListener
+
         txtInputZip = findViewById(R.id.inputEditTxtZip)
+        txtInputZip.onFocusChangeListener = focusListener
 
         spinnerState = findViewById(R.id.spnrStateSpinner)
         spinnerState.setOnTouchListener(touchListener)
 
         txtLayoutCity = findViewById(R.id.txtInputCity)
-        txtLayoutCity.onFocusChangeListener = focusListener
-
         txtLayoutStreetAddress = findViewById(R.id.txtInputStreetAddress)
-        txtLayoutStreetAddress.onFocusChangeListener = focusListener
-
         txtLayoutZip = findViewById(R.id.txtInputZipCode)
-        txtLayoutZip.onFocusChangeListener = (focusListener)
+    }
+
+    private fun getGPSLocation(){
+        //Check Permissions
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+                requestPermissions(permissions, REQUEST_CODE)
+                return
+            }
+        }
+        else{
+            getLocation()
+        }
+    }
+
+    private fun generateGPSDisabledDialog(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title_gps))
+        builder.setMessage(getString(R.string.alert_message_gps))
+        builder.setPositiveButton(getString(R.string.ok)){_: DialogInterface, _: Int ->}
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun getLocation(){
+        val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
+        val locListener = GPSListener()
+        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        getLocation()
     }
 
     private fun validAddress() : Boolean {
@@ -133,26 +184,48 @@ class ManualSearchActivity : AppCompatActivity() {
     inner class TouchListener : View.OnTouchListener {
         override fun onTouch(v: View?, event: MotionEvent?): Boolean {
             v!!.hideKeyboard()
+            (spinnerState.selectedView as TextView).error = null
             return false
         }
     }
 
-    inner class ButtonListener : View.OnClickListener {
+    private inner class ButtonListener : View.OnClickListener {
         override fun onClick(v: View?) {
-            var valid = true
-            if(!validAddress()) valid = false
-            if(!validCity()) valid = false
-            if(!validZip()) valid = false
-            if(!validState()) valid = false
-            if(valid){
-                //TODO Add all the API functionality
+            if(v!! == findViewById(R.id.btnSearchAddress)) {
+                var valid = true
+                if (!validAddress()) valid = false
+                if (!validCity()) valid = false
+                if (!validZip()) valid = false
+                if (!validState()) valid = false
+                if (valid) {
+                    //TODO Add all the API functionality
+                }
+            }
+
+            else{
+                getGPSLocation()
             }
         }
     }
 
-    inner class OnFocusListener : View.OnFocusChangeListener {
+    private inner class OnFocusListener : View.OnFocusChangeListener {
         override fun onFocusChange(v: View?, hasFocus: Boolean) {
-            TODO("Not yet implemented")
+            if(hasFocus) {
+                if(v == txtInputCity) txtLayoutCity.error = null
+                if(v == txtInputStreet) txtLayoutStreetAddress.error = null
+                if(v == txtInputZip) txtLayoutZip.error = null
+            }
+        }
+    }
+
+    private inner class GPSListener : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            //TODO Need to extract location from the location so it can be used by APIs
+        }
+
+        override fun onProviderDisabled(provider: String) {
+            super.onProviderDisabled(provider)
+            generateGPSDisabledDialog()
         }
     }
 }

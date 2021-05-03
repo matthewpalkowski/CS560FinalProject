@@ -40,8 +40,8 @@ class EndUserLicenseActivity : AppCompatActivity() {
 
     private fun generateDialog(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.alert_message))
+        builder.setTitle(getString(R.string.alert_title_eula))
+        builder.setMessage(getString(R.string.alert_message_eula))
         builder.setPositiveButton(getString(R.string.return_to_application)){
             _: DialogInterface, _: Int ->
         }
@@ -54,7 +54,7 @@ class EndUserLicenseActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    inner class ButtonListener : View.OnClickListener{
+    private inner class ButtonListener : View.OnClickListener{
         override fun onClick(v: View?) {
             if(v!!.equals(findViewById(R.id.btnAccept))){
                 val editor = getPreferences(MODE_PRIVATE).edit()
@@ -69,7 +69,7 @@ class EndUserLicenseActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    inner class ScrollListener : View.OnScrollChangeListener{
+    private inner class ScrollListener : View.OnScrollChangeListener{
         override fun onScrollChange(v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int){
             if (!v!!.canScrollVertically(1)) {
                 btnAccept.isEnabled = true

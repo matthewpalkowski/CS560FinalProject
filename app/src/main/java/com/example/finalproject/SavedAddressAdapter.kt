@@ -46,14 +46,14 @@ class SavedAddressAdapter(private val addressList : List<SavedAddressItem>) :
         //TODO implement creation of intent to go to SearchResult with data from the selected item
     }
 
-    inner class ShortPressListener : View.OnClickListener {
+    private inner class ShortPressListener : View.OnClickListener {
         override fun onClick(v: View?) {
             OpenItem(v)
         }
     }
 
     //TODO confirm if this is needed in combination with OnClick
-    inner class LongPressListener : View.OnLongClickListener {
+    private inner class LongPressListener : View.OnLongClickListener {
         override fun onLongClick(v: View?): Boolean {
             OpenItem(v)
             return false

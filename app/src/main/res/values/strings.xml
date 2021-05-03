@@ -2,10 +2,14 @@
     <string name="app_name">FinalProject</string>
 
     <string name="address">Street Address</string>
-    <string name="alert_title">WARNING</string>
-    <string name="alert_message">If you do not accept the End-User Licence Agreement you will not be
+    <string name="alert_title_eula">WARNING</string>
+    <string name="alert_title_gps">Unable to access GPS</string>
+    <string name="alert_message_eula">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string>
+    <string name="alert_message_gps">Unable to access GPS location either due to GPS being disabled
+        or due to permissions being denied. Please ensure GPS is enabled and that you approve permissions
+        for this application to use GPS to use this feature.</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_search_address"><u>Search</u></string>
     <string name="btn_reject">Reject</string>
@@ -17,9 +21,11 @@
     <string name="missing_street">Street address is required</string>
     <string name="missing_state">Select a state</string>
     <string name="missing_zip">Zip code is required</string>
+    <string name="ok">OK</string>
     <string name="return_to_application">Return to application</string>
     <string name="saved_addresses">Saved Address</string>
-    <string name="search_address">Search Address</string>
+    <string name="search_address">Search Address Manually</string>
+    <string name="search__current_address">Search Current Address</string>
     <string name="title">Home Evaluator</string>
     <string name="zip">Zip Code</string>
 

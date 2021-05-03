@@ -60,12 +60,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/search_address"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle_ManualSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCurrentAddressSearch" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtInputStreetAddress"
@@ -123,4 +123,26 @@
             android:layout_height="wrap_content"
             android:hint="@string/zip" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtSerachCurrentAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/search__current_address"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle_ManualSearch" />
+
+    <Button
+        android:id="@+id/btnCurrentAddressSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/btn_search_address"
+        app:layout_constraintStart_toStartOf="@+id/txtSerachCurrentAddress"
+        app:layout_constraintTop_toBottomOf="@+id/txtSerachCurrentAddress" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,23 @@
+Desired Features of Home Inspector app
+	-Air quality
+	-Drinking water quality
+	-Internet Service providers
+	-Quietness score
+		-distance to nearest road + class of nearest road
+		-noise reducing obstructions between home and nearest road
+		-planes flying over head
+			-expected height of those planes
+	-Earthquakes in the area
+	-Fire risk of the propery
+	-Risk of basement flooding
+		-Major Flooding risk
+		-Water level and basement height
+			-elevation and water funneling geometries
+	-Sun exposure through the year
+		-trees nearby and tree heights
+	-Nearest Grocery Stores
+	-Nearest Hospital
+	-Schools
+	-Crime Statistics
+
+	

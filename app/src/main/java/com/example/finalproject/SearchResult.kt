@@ -14,7 +14,7 @@ class SearchResult : AppCompatActivity() {
         //TODO implement
     }
 
-    inner class ButtonListener : View.OnClickListener{
+    private inner class ButtonListener : View.OnClickListener{
         override fun onClick(v: View?) {
             saveResult()
         }
