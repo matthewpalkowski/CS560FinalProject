@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-
 /**
  * @author Matthew Palkowski
  */
@@ -36,7 +35,7 @@ class ManualSearchActivity : AppCompatActivity() {
 
     /*TODO Requirements (8pts total needed)
     *  !DONE! Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
-    *  Use of an Android service that requires permissions (gps to grab current loc.) 1pt
+    *  !DONE! Use of an Android service that requires permissions (gps to grab current loc.) 1pt
     *  !DONE! Use of three or more Activities (3 activities see Activities) 1 pt
     *  Use of Async tasks (TBD) 1 pt
     *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
@@ -82,6 +81,7 @@ class ManualSearchActivity : AppCompatActivity() {
 
     private lateinit var touchListener : TouchListener
     private lateinit var focusListener: OnFocusListener
+    private lateinit var currentLocation : Location
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,19 +112,17 @@ class ManualSearchActivity : AppCompatActivity() {
         txtLayoutZip = findViewById(R.id.txtInputZipCode)
     }
 
-    private fun getGPSLocation(){
-        //Check Permissions
+    private fun getGPSPermissions(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
+            {
                 val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
                 requestPermissions(permissions, REQUEST_CODE)
                 return
             }
-        }
-        else{
-            getLocation()
         }
     }
 
@@ -138,14 +136,21 @@ class ManualSearchActivity : AppCompatActivity() {
     }
 
     private fun getLocation(){
-        val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
-        val locListener = GPSListener()
-        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
+            val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
+            val locListener = GPSListener()
+            locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+        }
+        else{
+            generateGPSDisabledDialog()
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        getLocation()
     }
 
     private fun validAddress() : Boolean {
@@ -164,7 +169,7 @@ class ManualSearchActivity : AppCompatActivity() {
 
     private fun validState(): Boolean {
         return if (spinnerState.selectedItem.toString() == resources.getStringArray(R.array.states_array)[0]) {
-            (spinnerState.getSelectedView() as TextView).error = getString(R.string.missing_state)
+            (spinnerState.selectedView as TextView).error = getString(R.string.missing_state)
             false
         } else true
     }
@@ -198,12 +203,14 @@ class ManualSearchActivity : AppCompatActivity() {
                 if (!validZip()) valid = false
                 if (!validState()) valid = false
                 if (valid) {
-                    //TODO Add all the API functionality
+                    //TODO Add call to all the API functionality
                 }
             }
 
             else{
-                getGPSLocation()
+                getGPSPermissions()
+                getLocation() //TODO add conditional for when cannot get gps location
+                //TODO Add call to all the API functionality
             }
         }
     }
@@ -220,12 +227,7 @@ class ManualSearchActivity : AppCompatActivity() {
 
     private inner class GPSListener : LocationListener {
         override fun onLocationChanged(location: Location) {
-            //TODO Need to extract location from the location so it can be used by APIs
-        }
-
-        override fun onProviderDisabled(provider: String) {
-            super.onProviderDisabled(provider)
-            generateGPSDisabledDialog()
+            currentLocation = location
         }
     }
 }

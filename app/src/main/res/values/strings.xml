@@ -7,9 +7,9 @@
     <string name="alert_message_eula">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string>
-    <string name="alert_message_gps">Unable to access GPS location either due to GPS being disabled
-        or due to permissions being denied. Please ensure GPS is enabled and that you approve permissions
-        for this application to use GPS to use this feature.</string>
+    <string name="alert_message_gps">Unable to access GPS location. Please ensure GPS is enabled and
+        that you approve permissions for this application to use GP, otherwise use the manual
+        search.</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_search_address"><u>Search</u></string>
     <string name="btn_reject">Reject</string>

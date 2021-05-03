@@ -27,8 +27,9 @@ class LoadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loading)
         supportActionBar!!.hide()
 
-        val eulaAccepted : Boolean =
-            getPreferences(Activity.MODE_PRIVATE).getBoolean(
+        //FIXME SharedPreference not being story or retrieved properly
+        val preferences = getPreferences(MODE_PRIVATE)
+        val eulaAccepted : Boolean = getPreferences(Activity.MODE_PRIVATE).getBoolean(
                 getString(R.string.eula_acceptance),false)
 
         if(!eulaAccepted){

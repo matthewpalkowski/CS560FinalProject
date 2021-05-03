@@ -48,7 +48,7 @@ class EndUserLicenseActivity : AppCompatActivity() {
         builder.setNegativeButton(getString(R.string.confirm)){
             _: DialogInterface, _: Int ->
             setResult(Activity.RESULT_CANCELED)
-            finishAffinity()
+            finishAndRemoveTask()
         }
         val dialog = builder.create()
         dialog.show()
@@ -56,16 +56,18 @@ class EndUserLicenseActivity : AppCompatActivity() {
 
     private inner class ButtonListener : View.OnClickListener{
         override fun onClick(v: View?) {
-            if(v!!.equals(findViewById(R.id.btnAccept))){
-                val editor = getPreferences(MODE_PRIVATE).edit()
-                editor.putBoolean(getString(R.string.eula_acceptance),true)
+            if(v!! == findViewById(R.id.btnAccept)){
                 setResult(Activity.RESULT_OK)
-                finishAndRemoveTask()
+                val preferences = getPreferences(MODE_PRIVATE)
+                val editor = getPreferences(MODE_PRIVATE).edit()
+                editor.clear()
+                editor.putBoolean(getString(R.string.eula_acceptance),true)
+                editor.apply()
+                finish()
             }
 
             if(v == findViewById(R.id.btnReject)) generateDialog()
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
