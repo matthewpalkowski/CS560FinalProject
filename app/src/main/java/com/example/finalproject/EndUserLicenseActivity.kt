@@ -58,8 +58,10 @@ class EndUserLicenseActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             if(v!! == findViewById(R.id.btnAccept)){
                 setResult(Activity.RESULT_OK)
-                val preferences = getPreferences(MODE_PRIVATE)
-                val editor = getPreferences(MODE_PRIVATE).edit()
+                val editor = getSharedPreferences(
+                        getString(R.string.preferences_file),
+                        MODE_PRIVATE)
+                        .edit()
                 editor.clear()
                 editor.putBoolean(getString(R.string.eula_acceptance),true)
                 editor.apply()

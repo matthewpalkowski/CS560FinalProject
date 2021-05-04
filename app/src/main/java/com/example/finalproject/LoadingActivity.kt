@@ -28,9 +28,9 @@ class LoadingActivity : AppCompatActivity() {
         supportActionBar!!.hide()
 
         //FIXME SharedPreference not being story or retrieved properly
-        val preferences = getPreferences(MODE_PRIVATE)
-        val eulaAccepted : Boolean = getPreferences(Activity.MODE_PRIVATE).getBoolean(
-                getString(R.string.eula_acceptance),false)
+        val eulaAccepted : Boolean = getSharedPreferences(
+                getString(R.string.preferences_file),
+                Activity.MODE_PRIVATE).getBoolean(getString(R.string.eula_acceptance),false)
 
         if(!eulaAccepted){
             val eulaIntent = Intent(this,EndUserLicenseActivity::class.java)

@@ -22,6 +22,7 @@
     <string name="missing_state">Select a state</string>
     <string name="missing_zip">Zip code is required</string>
     <string name="ok">OK</string>
+    <string name="preferences_file">userSettings</string>
     <string name="return_to_application">Return to application</string>
     <string name="saved_addresses">Saved Address</string>
     <string name="search_address">Search Address Manually</string>
