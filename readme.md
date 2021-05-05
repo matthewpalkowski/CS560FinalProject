@@ -1,6 +1,6 @@
-##Home Inspector Application##
+# Home Inspector Application
 
-##Application intent##
+## Application intent
 
 The homes we live in are some of the most fundemental parts of everyone's day to day life in the United States.
 The places we live are a key factor in some of the most basic elements of our lives down to the water we drink, 
@@ -13,7 +13,7 @@ The goal of Home Inspector is to put the important information beyond just the f
 directly at the user's fingertips. Home Inspector takes information from sources like the EPA to give the user
 access to the other risks a particular residence might pose to them beyond just the risk to thier wallet.
 
-##Application Requirements##
+## Application Requirements
 
 Home Inspector is currently only available on Android and requires that the device is operating on Android 7.1  
 Nougat (API level 25) or greater. Attempting to use earlier version of the Android Operating system may lead to
