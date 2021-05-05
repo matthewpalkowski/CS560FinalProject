@@ -10,14 +10,12 @@ import android.os.Looper
 class LoadingActivity : AppCompatActivity() {
 
     /*TODO
-    *   -Check prefs to see if user has agreed to EULA
-    *       -if not, start intent to go to EULA activity
+    *   -Add a markdown file to the repository
     *   -Check network connection
     *       -if offline alert dialog
     *           -use broadcast receiver listening for network status change
     *               -Change to connected creates toast message "Connection Established" and proceed
     *           -Ok exits app
-    *
     * */
 
     private val EULA_REQUEST_CODE = 577
@@ -27,7 +25,6 @@ class LoadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loading)
         supportActionBar!!.hide()
 
-        //FIXME SharedPreference not being story or retrieved properly
         val eulaAccepted : Boolean = getSharedPreferences(
                 getString(R.string.preferences_file),
                 Activity.MODE_PRIVATE).getBoolean(getString(R.string.eula_acceptance),false)
