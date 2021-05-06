@@ -1,12 +1,14 @@
 package com.example.finalproject
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -14,10 +16,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * @author Matthew Palkowski
@@ -51,7 +57,8 @@ class ManualSearchActivity : AppCompatActivity() {
     */
 
     /*FIXME - MISC
-     *  Need to fix padding on the TextInputs
+     *  -Need to fix padding on the TextInputs
+     *  -Getting current coordinates not working properly likely due to multiple threads
      */
 
     /*TODO - Major Components
@@ -112,20 +119,6 @@ class ManualSearchActivity : AppCompatActivity() {
         txtLayoutZip = findViewById(R.id.txtInputZipCode)
     }
 
-    private fun getGPSPermissions(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M)
-            {
-                val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-                requestPermissions(permissions, REQUEST_CODE)
-                return
-            }
-        }
-    }
-
     private fun generateGPSDisabledDialog(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.alert_title_gps))
@@ -135,22 +128,55 @@ class ManualSearchActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun getLocation(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
-            val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
-            val locListener = GPSListener()
-            locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+    private fun getGeolocation(reverse : Boolean = false){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(getString(R.string.google_geocoding_base_url))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
+        if(reverse){
+            //TODO build reverse-geocoding query based on lat and long
         }
         else{
-            generateGPSDisabledDialog()
+            //TODO build geocoding query based on address
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getGPSListenerResults(){
+        val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
+        val locListener = GPSListener()
+        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun getGPSLocation(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+        {
+            getGPSListenerResults()
+        }
+        else{
+            val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            requestPermissions(permissions, REQUEST_CODE)
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            REQUEST_CODE -> {
+                var allAccepted = true
+                for(i in grantResults){
+                    if(i == PackageManager.PERMISSION_DENIED) allAccepted = false
+                }
+                if(allAccepted) getGPSListenerResults()
+                else generateGPSDisabledDialog()
+                return
+            }
+            else -> {}
+        }
     }
 
     private fun validAddress() : Boolean {
@@ -195,6 +221,7 @@ class ManualSearchActivity : AppCompatActivity() {
     }
 
     private inner class ButtonListener : View.OnClickListener {
+        @RequiresApi(Build.VERSION_CODES.M)
         override fun onClick(v: View?) {
             if(v!! == findViewById(R.id.btnSearchAddress)) {
                 var valid = true
@@ -208,8 +235,7 @@ class ManualSearchActivity : AppCompatActivity() {
             }
 
             else{
-                getGPSPermissions()
-                getLocation() //TODO add conditional for when cannot get gps location
+                getGPSLocation() //TODO add conditional for when cannot get gps location
                 //TODO Add call to all the API functionality
             }
         }

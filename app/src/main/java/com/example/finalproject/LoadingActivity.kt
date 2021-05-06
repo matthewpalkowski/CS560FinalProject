@@ -10,7 +10,6 @@ import android.os.Looper
 class LoadingActivity : AppCompatActivity() {
 
     /*TODO
-    *   -Add a markdown file to the repository
     *   -Check network connection
     *       -if offline alert dialog
     *           -use broadcast receiver listening for network status change
