@@ -18,7 +18,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -88,7 +87,10 @@ class ManualSearchActivity : AppCompatActivity() {
 
     private lateinit var touchListener : TouchListener
     private lateinit var focusListener: OnFocusListener
-    private lateinit var currentLocation : Location
+
+    private lateinit var currentAddress : Address
+
+    private var currentLocation : Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,13 +130,14 @@ class ManualSearchActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun getGeolocation(reverse : Boolean = false){
+    private fun getGeocode(reverseGeo : Boolean = false){
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.google_geocoding_base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
-        if(reverse){
+        if(reverseGeo){
+
             //TODO build reverse-geocoding query based on lat and long
         }
         else{
@@ -146,7 +149,7 @@ class ManualSearchActivity : AppCompatActivity() {
     private fun getGPSListenerResults(){
         val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
         val locListener = GPSListener()
-        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener)
+        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener) //Calls onLocationChanged() in GPS listener
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -230,13 +233,19 @@ class ManualSearchActivity : AppCompatActivity() {
                 if (!validZip()) valid = false
                 if (!validState()) valid = false
                 if (valid) {
+                    currentAddress = Address(
+                        txtInputStreet.text.toString(),
+                        txtInputCity.text.toString(),
+                        spinnerState.selectedItem.toString(),
+                        txtInputZip.text.toString())
+                    getGeocode()
                     //TODO Add call to all the API functionality
                 }
             }
 
             else{
-                getGPSLocation() //TODO add conditional for when cannot get gps location
-                //TODO Add call to all the API functionality
+                getGPSLocation()
+                if(currentLocation != null) getGeocode(true)
             }
         }
     }
