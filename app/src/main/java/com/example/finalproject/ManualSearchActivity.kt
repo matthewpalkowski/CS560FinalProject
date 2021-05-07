@@ -126,24 +126,16 @@ class ManualSearchActivity : AppCompatActivity() {
         txtLayoutZip = findViewById(R.id.txtInputZipCode)
     }
 
-    private fun generateGPSDisabledDialog(){
+    private fun generateWarningDialog(title : String, message : String){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.alert_title_gps))
-        builder.setMessage(getString(R.string.alert_message_gps))
+        builder.setTitle(title)
+        builder.setMessage(message)
         builder.setPositiveButton(getString(R.string.ok)){_: DialogInterface, _: Int ->}
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun generateAPIFailureDialog(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.alert_title_geocoding))
-        builder.setMessage(getString(R.string.alert_message_geocoding))
-        builder.setPositiveButton(getString(R.string.ok)){_: DialogInterface, _: Int ->}
-        val dialog = builder.create()
-        dialog.show()
-    }
-
+    //FIXME - extract out some of the internal functionality into private functions
     private fun getGeocode(reverseGeo : Boolean = false){
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.google_geocoding_base_url))
@@ -157,15 +149,26 @@ class ManualSearchActivity : AppCompatActivity() {
             stringBuilder.append(currentLocation!!.longitude.toString())
             googleGeolocationAPI.getReverseGeolocation(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY)
                 .enqueue(object : Callback<GoogleGeocodeResults> {
+
                     override fun onResponse(
                         call: Call<GoogleGeocodeResults>,
                         response: Response<GoogleGeocodeResults>
                     ) {
-                        TODO("Not yet implemented")
+                        when(response.body()!!.status){
+                            getString(R.string.ok) -> {TODO("Not yet implemented")}
+                            getString(R.string.zero_results) -> generateWarningDialog(
+                                getString(R.string.alert_title_invalid_address),
+                                getString(R.string.alert_message_invalid_address))
+                            else -> generateWarningDialog(
+                                getString(R.string.alert_title_geocoding),
+                                getString(R.string.alert_message_geocoding))
+                        }
                     }
 
                     override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
-                        generateAPIFailureDialog()
+                        generateWarningDialog(
+                            getString(R.string.alert_title_geocoding),
+                            getString(R.string.alert_message_geocoding))
                     }
                 })
         }
@@ -185,7 +188,9 @@ class ManualSearchActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
-                        generateAPIFailureDialog()
+                        generateWarningDialog(
+                            getString(R.string.alert_title_geocoding),
+                            getString(R.string.alert_message_geocoding))
                     }
                 })
         }
@@ -221,7 +226,9 @@ class ManualSearchActivity : AppCompatActivity() {
                     if(i == PackageManager.PERMISSION_DENIED) allAccepted = false
                 }
                 if(allAccepted) getGPSListenerResults()
-                else generateGPSDisabledDialog()
+                else generateWarningDialog(
+                    getString(R.string.alert_title_gps),
+                    getString(R.string.alert_message_gps))
                 return
             }
             else -> {}
@@ -291,7 +298,8 @@ class ManualSearchActivity : AppCompatActivity() {
 
             else{
                 getGPSLocation()
-                if(currentLocation != null) getGeocode(true)
+                if(currentLocation != null)
+                    getGeocode(true)
             }
         }
     }

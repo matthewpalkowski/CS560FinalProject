@@ -2394,9 +2394,13 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string address
 string alert_message_eula
+string alert_message_geocoding
 string alert_message_gps
+string alert_message_invalid_address
 string alert_title_eula
+string alert_title_geocoding
 string alert_title_gps
+string alert_title_invalid_address
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -2435,7 +2439,6 @@ string eula_acceptance
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
-string google_api_key
 string google_geocoding_base_url
 string google_maps_key
 string hide_bottom_view_on_scroll_behavior
@@ -2511,6 +2514,7 @@ string search_menu_title
 string status_bar_notification_info_overflow
 string title
 string title_activity_maps
+string zero_results
 string zip
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

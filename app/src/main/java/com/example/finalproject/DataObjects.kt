@@ -10,9 +10,8 @@ data class GoogleGeocodeResults(val results : List<GeocodeResult>, val status : 
 
 data class GeocodeResult(val formattedAddress : String, val geometry: GeocodeResultGeometry)
 
-data class GeocodeResultGeometry(val locaiton : GeocodeLocation)
+data class GeocodeResultGeometry(val location : GeocodeLocation)
 
 data class GeocodeLocation(val lat : Double, val lng : Double)
 
 data class SavedAddressItem(val address: Address, val imgURL : String)
-

@@ -6474,58 +6474,58 @@
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string><string name="alert_message_gps">Unable to access GPS location. Please ensure GPS is enabled and
         that you approve permissions for this application to use GP, otherwise use the manual
-        search.</string><string name="google_api_key">AIzaSyBz2tVf8mJi2fm40pdDLdlhyTilqfURDu0</string><string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/</string><string name="btn_accept">Accept</string><string name="btn_search_address"><u>Search</u></string><string name="btn_reject">Reject</string><string name="confirm">Confirm</string><string name="city">City</string><string name="eula_acceptance">eula_acceptance</string><string name="loading">Loading</string><string name="missing_city">City is required</string><string name="missing_street">Street address is required</string><string name="missing_state">Select a state</string><string name="missing_zip">Zip code is required</string><string name="ok">OK</string><string name="preferences_file">userSettings</string><string name="return_to_application">Return to application</string><string name="saved_addresses">Saved Address</string><string name="search_address">Search Address Manually</string><string name="search__current_address">Search Current Address</string><string name="title">Home Evaluator</string><string name="zip">Zip Code</string><string-array name="states_array">
+        search.</string><string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/json</string><string name="btn_accept">Accept</string><string name="btn_search_address"><u>Search</u></string><string name="btn_reject">Reject</string><string name="confirm">Confirm</string><string name="city">City</string><string name="eula_acceptance">eula_acceptance</string><string name="loading">Loading</string><string name="missing_city">City is required</string><string name="missing_street">Street address is required</string><string name="missing_state">Select a state</string><string name="missing_zip">Zip code is required</string><string name="ok">OK</string><string name="preferences_file">userSettings</string><string name="return_to_application">Return to application</string><string name="saved_addresses">Saved Address</string><string name="search_address">Search Address Manually</string><string name="search__current_address">Search Current Address</string><string name="title">Home Evaluator</string><string name="zip">Zip Code</string><string-array name="states_array">
         <item>Select State</item>
-        <item>Alabama</item>
-        <item>Alaska</item>
-        <item>Arizona</item>
-        <item>Arkansas</item>
-        <item>California</item>
-        <item>Colorado</item>
-        <item>Connecticut</item>
-        <item>Delaware</item>
-        <item>Florida</item>
-        <item>Georgia</item>
-        <item>Hawaii</item>
-        <item>Idaho</item>
-        <item>Illinois</item>
-        <item>Indiana</item>
-        <item>Iowa</item>
-        <item>Kansas</item>
-        <item>Kentucky</item>
-        <item>Louisiana</item>
-        <item>Maine</item>
-        <item>Maryland</item>
-        <item>Massachusetts</item>
-        <item>Michigan</item>
-        <item>Minnesota</item>
-        <item>Mississippi</item>
-        <item>Missouri</item>
-        <item>Montana</item>
-        <item>Nebraska</item>
-        <item>Nevada</item>
-        <item>New Hampshire</item>
-        <item>New Jersey</item>
-        <item>New Mexico</item>
-        <item>New York</item>
-        <item>North Carolina</item>
-        <item>North Dakota</item>
-        <item>Ohio</item>
-        <item>Oklahoma</item>
-        <item>Oregon</item>
-        <item>Pennsylvania</item>
-        <item>Rhode Island</item>
-        <item>South Carolina</item>
-        <item>South Dakota</item>
-        <item>Tennessee</item>
-        <item>Texas</item>
-        <item>Utah</item>
-        <item>Vermont</item>
-        <item>Virginia</item>
-        <item>Washington</item>
-        <item>West Virginia</item>
-        <item>Wisconsin</item>
-        <item>Wyoming</item>
+        <item>AL</item>
+        <item>AS</item>
+        <item>AZ</item>
+        <item>AR</item>
+        <item>CA</item>
+        <item>CO</item>
+        <item>CT</item>
+        <item>DE</item>
+        <item>FL</item>
+        <item>GA</item>
+        <item>HI</item>
+        <item>ID</item>
+        <item>IL</item>
+        <item>IN</item>
+        <item>IA</item>
+        <item>KS</item>
+        <item>KY</item>
+        <item>LA</item>
+        <item>ME</item>
+        <item>MD</item>
+        <item>MA</item>
+        <item>MI</item>
+        <item>MN</item>
+        <item>MS</item>
+        <item>MO</item>
+        <item>MT</item>
+        <item>NE</item>
+        <item>NV</item>
+        <item>NH</item>
+        <item>NJ</item>
+        <item>NM</item>
+        <item>NY</item>
+        <item>NC</item>
+        <item>ND</item>
+        <item>OH</item>
+        <item>OK</item>
+        <item>OR</item>
+        <item>PA</item>
+        <item>RI</item>
+        <item>SC</item>
+        <item>SD</item>
+        <item>TN</item>
+        <item>TX</item>
+        <item>UT</item>
+        <item>VT</item>
+        <item>VA</item>
+        <item>WA</item>
+        <item>WV</item>
+        <item>WI</item>
+        <item>WY</item>
     </string-array><string name="end_user_license_agreement">
         Note: This is not a real, legally binding agreement. This agreement is a mock agreement made for educational purposes. Agreement or rejection of this agreement does not bear any legal consequence to the user. Content of this agreement was sourced from https://www.telerik.com/purchase/license-agreement/testing-framework-lw-s.
          \n\n<b><i>IMPORTANT – PLEASE READ THIS END USER LICENSE AGREEMENT (THE \"AGREEMENT\") CAREFULLY BEFORE ATTEMPTING TO DOWNLOAD OR USE ANY SOFTWARE, DOCUMENTATION, OR OTHER MATERIALS MADE AVAILABLE THROUGH THIS APPLICATION.
@@ -6578,7 +6578,9 @@
         \n\n<b>19. Export Classifications</b>
         \nYou specifically agree not to export, re-export, or transfer the Software to any country in violation of U.S. export laws or regulations.  You expressly agree not to export or re-export MCP Technologies Software to any country, person, entity or end user subject to U.S. export restrictions. You specifically agree not to export, re-export, or transfer the Software to any country to which the U.S. has embargoed or restricted the export of goods or services, or to any national of any such country, wherever located, who intends to transmit or transport the products back to such country, or to any person or entity who has been prohibited from participating in U.S. export transactions by any federal agency of the U.S. government. You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied Your export privileges.
         \nYOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS AGREEMENT&amp; S TERMS AND CONDITIONS.  YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN MCP TECHNOLOGIES AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.
-    </string><string name="title_activity_maps">Map</string></file><file path="C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\res\values\themes.xml" qualifiers=""><style name="Theme.FinalProject" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    </string><string name="title_activity_maps">Map</string><string name="alert_message_invalid_address">No results returned for entered address.</string><string name="zero_results">ZERO_RESULTS</string><string name="alert_title_invalid_address">Invalid address</string><string name="alert_message_geocoding">Unable to access geolocation service. Please ensure you have
+        a stable internet connection and try again later. If you continue to experience issues, it may be
+        that the geolocation service is unavailable at this time.</string><string name="alert_title_geocoding">Unable to access geocoding service.</string></file><file path="C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\res\values\themes.xml" qualifiers=""><style name="Theme.FinalProject" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

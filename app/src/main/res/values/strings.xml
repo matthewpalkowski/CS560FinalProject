@@ -5,6 +5,7 @@
     <string name="alert_title_eula">WARNING</string>
     <string name="alert_title_geocoding">Unable to access geocoding service.</string>
     <string name="alert_title_gps">Unable to access GPS</string>
+    <string name="alert_title_invalid_address">Invalid address</string>
     <string name="alert_message_eula">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string>
@@ -14,6 +15,7 @@
     <string name="alert_message_gps">Unable to access GPS location. Please ensure GPS is enabled and
         that you approve permissions for this application to use GP, otherwise use the manual
         search.</string>
+    <string name="alert_message_invalid_address">No results returned for entered address.</string>
     <string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/json</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_search_address"><u>Search</u></string>
@@ -31,8 +33,10 @@
     <string name="return_to_application">Return to application</string>
     <string name="saved_addresses">Saved Address</string>
     <string name="search_address">Search Address Manually</string>
-    <string name="search__current_address">Search Current Address</string>
+    <string name="search__current_address">Search Current Address</string>3
     <string name="title">Home Evaluator</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="zero_results">ZERO_RESULTS</string>
     <string name="zip">Zip Code</string>
 
     <string-array name="states_array">
@@ -142,5 +146,4 @@
         \nYou specifically agree not to export, re-export, or transfer the Software to any country in violation of U.S. export laws or regulations.  You expressly agree not to export or re-export MCP Technologies Software to any country, person, entity or end user subject to U.S. export restrictions. You specifically agree not to export, re-export, or transfer the Software to any country to which the U.S. has embargoed or restricted the export of goods or services, or to any national of any such country, wherever located, who intends to transmit or transport the products back to such country, or to any person or entity who has been prohibited from participating in U.S. export transactions by any federal agency of the U.S. government. You warrant and represent that neither the U.S.A. Bureau of Export Administration nor any other federal agency has suspended, revoked or denied Your export privileges.
         \nYOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS AGREEMENT&amp; S TERMS AND CONDITIONS.  YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN MCP TECHNOLOGIES AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.
     </string>
-    <string name="title_activity_maps">Map</string>
 </resources>
