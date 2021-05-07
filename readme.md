@@ -18,3 +18,16 @@ access to the other risks a particular residence might pose to them beyond just 
 Home Inspector is currently only available on Android and requires that the device is operating on Android 7.1  
 Nougat (API level 25) or greater. Attempting to use earlier version of the Android Operating system may lead to
 compatability issues and unexpected crashes.
+
+Note that while this project is in developement, the user will have to provide thier own API keys to use the API
+connections within this aplication. To do this a file name "ApiKeys.kt" should be added to 
+\app\src\main\java\com\example\finalproject directory.
+
+This file should contain the following text with the |YOUR API KEY HERE| tags replaced by the user's own API key.
+package com.example.finalproject
+
+class ApiKeys {
+    companion object {
+        const val GOOGLE_API_KEY: String = "|YOUR API KEY HERE|"
+    }
+}

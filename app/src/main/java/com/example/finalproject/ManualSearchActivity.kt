@@ -21,8 +21,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.StringBuilder
 
 /**
  * @author Matthew Palkowski
@@ -57,7 +61,8 @@ class ManualSearchActivity : AppCompatActivity() {
 
     /*FIXME - MISC
      *  -Need to fix padding on the TextInputs
-     *  -Getting current coordinates not working properly likely due to multiple threads
+     *  -Delete ZIP since its not needed for the API calls
+     *  -State needs to be 2 letter abbreviation
      */
 
     /*TODO - Major Components
@@ -130,18 +135,59 @@ class ManualSearchActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun generateAPIFailureDialog(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title_geocoding))
+        builder.setMessage(getString(R.string.alert_message_geocoding))
+        builder.setPositiveButton(getString(R.string.ok)){_: DialogInterface, _: Int ->}
+        val dialog = builder.create()
+        dialog.show()
+    }
+
     private fun getGeocode(reverseGeo : Boolean = false){
         val retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.google_geocoding_base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
+        val stringBuilder = StringBuilder()
         if(reverseGeo){
+            stringBuilder.append(currentLocation!!.latitude.toString())
+            stringBuilder.append(",")
+            stringBuilder.append(currentLocation!!.longitude.toString())
+            googleGeolocationAPI.getReverseGeolocation(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY)
+                .enqueue(object : Callback<GoogleGeocodeResults> {
+                    override fun onResponse(
+                        call: Call<GoogleGeocodeResults>,
+                        response: Response<GoogleGeocodeResults>
+                    ) {
+                        TODO("Not yet implemented")
+                    }
 
-            //TODO build reverse-geocoding query based on lat and long
+                    override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
+                        generateAPIFailureDialog()
+                    }
+                })
         }
         else{
-            //TODO build geocoding query based on address
+            stringBuilder.append(currentAddress.streetAddress)
+            stringBuilder.append(" ")
+            stringBuilder.append(currentAddress.city)
+            stringBuilder.append(" ")
+            stringBuilder.append(currentAddress.state)
+            googleGeolocationAPI.getGeolocaiton(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY)
+                .enqueue(object : Callback<GoogleGeocodeResults>{
+                    override fun onResponse(
+                        call: Call<GoogleGeocodeResults>,
+                        response: Response<GoogleGeocodeResults>
+                    ) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
+                        generateAPIFailureDialog()
+                    }
+                })
         }
     }
 
