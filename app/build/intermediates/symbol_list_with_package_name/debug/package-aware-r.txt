@@ -1961,7 +1961,6 @@ id imgAppIcon_SearchResult
 id info
 id inputEditTxtCity
 id inputEditTxtStreetAddress
-id inputEditTxtZip
 id invisible
 id inward
 id italic
@@ -2186,7 +2185,6 @@ id txtCity
 id txtEULA
 id txtInputCity
 id txtInputStreetAddress
-id txtInputZipCode
 id txtLoading
 id txtSaveAddresses
 id txtSearchAddress
@@ -2396,6 +2394,7 @@ string address
 string alert_message_eula
 string alert_message_geocoding
 string alert_message_gps
+string alert_message_gps_still_locating
 string alert_message_invalid_address
 string alert_title_eula
 string alert_title_geocoding

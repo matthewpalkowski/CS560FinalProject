@@ -6,13 +6,15 @@ import retrofit2.http.POST
 
 interface IGoogleGeolocation {
 
-    @POST(".")
+    //FIXME - failing to build the query - error with the FIELD tag
+    @POST("json")
     fun getGeolocaiton(
         @Field("address") address: String,
         @Field("key") key : String)
         : Call<GoogleGeocodeResults>
 
-    @POST(".")
+    //FIXME - failing to build the query - error with the FIELD tag
+    @POST("json")
     fun getReverseGeolocation(
         @Field("latlang") coodinates: String,
         @Field("key") key: String)

@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -63,6 +64,7 @@ class ManualSearchActivity : AppCompatActivity() {
      *  -Need to fix padding on the TextInputs
      *  -Delete ZIP since its not needed for the API calls
      *  -State needs to be 2 letter abbreviation
+     *  -Fix consequences of the fact that zip code was removed from the inputs and the Address data class
      */
 
     /*TODO - Major Components
@@ -76,19 +78,20 @@ class ManualSearchActivity : AppCompatActivity() {
      */
 
     private val GPS : String = "gps"
-    private val UPDATE_TIME : Long = 5000
-    private val UPDATE_DIST : Float = 100F
+    private val TOAST_TEXT : String = "GPS location found"
+    private val UPDATE_TIME : Long = 0
+    private val UPDATE_DIST : Float = 0F
     private val REQUEST_CODE : Int = 10
+
+    private lateinit var gpsButton : Button
 
     private lateinit var spinnerState : Spinner
 
     private lateinit var txtLayoutCity : TextInputLayout
     private lateinit var txtLayoutStreetAddress : TextInputLayout
-    private lateinit var txtLayoutZip : TextInputLayout
 
     private lateinit var txtInputCity : TextInputEditText
     private lateinit var txtInputStreet : TextInputEditText
-    private lateinit var txtInputZip : TextInputEditText
 
     private lateinit var touchListener : TouchListener
     private lateinit var focusListener: OnFocusListener
@@ -97,14 +100,18 @@ class ManualSearchActivity : AppCompatActivity() {
 
     private var currentLocation : Location? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
+        gpsButton = findViewById<Button>(R.id.btnCurrentAddressSearch)
+
         val buttonListener = ButtonListener()
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(buttonListener)
-        findViewById<Button>(R.id.btnCurrentAddressSearch).setOnClickListener(buttonListener)
+        gpsButton.setOnClickListener(buttonListener)
+        gpsButton.isEnabled = false
 
         touchListener = TouchListener()
         focusListener = OnFocusListener()
@@ -115,15 +122,30 @@ class ManualSearchActivity : AppCompatActivity() {
         txtInputStreet = findViewById(R.id.inputEditTxtStreetAddress)
         txtInputStreet.onFocusChangeListener = focusListener
 
-        txtInputZip = findViewById(R.id.inputEditTxtZip)
-        txtInputZip.onFocusChangeListener = focusListener
-
         spinnerState = findViewById(R.id.spnrStateSpinner)
         spinnerState.setOnTouchListener(touchListener)
 
         txtLayoutCity = findViewById(R.id.txtInputCity)
         txtLayoutStreetAddress = findViewById(R.id.txtInputStreetAddress)
-        txtLayoutZip = findViewById(R.id.txtInputZipCode)
+
+        getGPSLocation()
+    }
+
+    private fun generateQueryString(reverseGeo: Boolean) : String {
+        val stringBuilder = StringBuilder()
+        if(reverseGeo) {
+            stringBuilder.append(currentLocation!!.latitude.toString())
+            stringBuilder.append(",")
+            stringBuilder.append(currentLocation!!.longitude.toString())
+        }
+        else{
+            stringBuilder.append(currentAddress.streetAddress)
+            stringBuilder.append(" ")
+            stringBuilder.append(currentAddress.city)
+            stringBuilder.append(" ")
+            stringBuilder.append(currentAddress.state)
+        }
+        return stringBuilder.toString()
     }
 
     private fun generateWarningDialog(title : String, message : String){
@@ -136,20 +158,17 @@ class ManualSearchActivity : AppCompatActivity() {
     }
 
     //FIXME - extract out some of the internal functionality into private functions
+    //FIXME - failing to build the query
     private fun getGeocode(reverseGeo : Boolean = false){
         val retrofit = Retrofit.Builder()
-            .baseUrl(getString(R.string.google_geocoding_base_url))
+             .baseUrl(getString(R.string.google_geocoding_base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
-        val stringBuilder = StringBuilder()
+        val queryString = generateQueryString(reverseGeo)
         if(reverseGeo){
-            stringBuilder.append(currentLocation!!.latitude.toString())
-            stringBuilder.append(",")
-            stringBuilder.append(currentLocation!!.longitude.toString())
-            googleGeolocationAPI.getReverseGeolocation(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY)
+            googleGeolocationAPI.getReverseGeolocation(queryString,ApiKeys.GOOGLE_API_KEY)
                 .enqueue(object : Callback<GoogleGeocodeResults> {
-
                     override fun onResponse(
                         call: Call<GoogleGeocodeResults>,
                         response: Response<GoogleGeocodeResults>
@@ -173,12 +192,7 @@ class ManualSearchActivity : AppCompatActivity() {
                 })
         }
         else{
-            stringBuilder.append(currentAddress.streetAddress)
-            stringBuilder.append(" ")
-            stringBuilder.append(currentAddress.city)
-            stringBuilder.append(" ")
-            stringBuilder.append(currentAddress.state)
-            googleGeolocationAPI.getGeolocaiton(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY)
+            googleGeolocationAPI.getGeolocaiton(queryString,ApiKeys.GOOGLE_API_KEY)
                 .enqueue(object : Callback<GoogleGeocodeResults>{
                     override fun onResponse(
                         call: Call<GoogleGeocodeResults>,
@@ -208,9 +222,7 @@ class ManualSearchActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
                         this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-        {
             getGPSListenerResults()
-        }
         else{
             val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
             requestPermissions(permissions, REQUEST_CODE)
@@ -256,11 +268,13 @@ class ManualSearchActivity : AppCompatActivity() {
         } else true
     }
 
-    private fun validZip() : Boolean{
-        return if(txtInputZip.length() == 0) {
-            txtLayoutZip.error = getString(R.string.missing_zip)
-            false
-        } else true
+    private fun updateLocation(location: Location){
+        val previousLocation : Location? = currentLocation
+        currentLocation = location
+        if(previousLocation == null && currentLocation != null){
+            Toast.makeText(this,TOAST_TEXT,Toast.LENGTH_SHORT).show()
+            gpsButton.isEnabled = true
+        }
     }
 
     private fun View.hideKeyboard(){
@@ -283,23 +297,22 @@ class ManualSearchActivity : AppCompatActivity() {
                 var valid = true
                 if (!validAddress()) valid = false
                 if (!validCity()) valid = false
-                if (!validZip()) valid = false
                 if (!validState()) valid = false
                 if (valid) {
                     currentAddress = Address(
                         txtInputStreet.text.toString(),
                         txtInputCity.text.toString(),
-                        spinnerState.selectedItem.toString(),
-                        txtInputZip.text.toString())
+                        spinnerState.selectedItem.toString())
                     getGeocode()
                     //TODO Add call to all the API functionality
                 }
             }
 
             else{
-                getGPSLocation()
-                if(currentLocation != null)
-                    getGeocode(true)
+                if(currentLocation == null) generateWarningDialog(getString(
+                        R.string.alert_message_gps),
+                        getString(R.string.alert_message_gps))
+                else getGeocode(true)
             }
         }
     }
@@ -309,14 +322,13 @@ class ManualSearchActivity : AppCompatActivity() {
             if(hasFocus) {
                 if(v == txtInputCity) txtLayoutCity.error = null
                 if(v == txtInputStreet) txtLayoutStreetAddress.error = null
-                if(v == txtInputZip) txtLayoutZip.error = null
             }
         }
     }
 
     private inner class GPSListener : LocationListener {
         override fun onLocationChanged(location: Location) {
-            currentLocation = location
+            updateLocation(location)
         }
     }
 }

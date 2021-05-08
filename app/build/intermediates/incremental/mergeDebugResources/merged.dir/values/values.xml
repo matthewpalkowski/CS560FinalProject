@@ -1115,6 +1115,7 @@
     <string name="alert_message_gps">Unable to access GPS location. Please ensure GPS is enabled and
         that you approve permissions for this application to use GP, otherwise use the manual
         search.</string>
+    <string name="alert_message_gps_still_locating">GPS was unable to be obtained. Please wait for use manual search.</string>
     <string name="alert_message_invalid_address">No results returned for entered address.</string>
     <string name="alert_title_eula">WARNING</string>
     <string name="alert_title_geocoding">Unable to access geocoding service.</string>
@@ -1210,7 +1211,7 @@
     <string name="exposed_dropdown_menu_content_description">Show dropdown menu</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
-    <string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/json</string>
+    <string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBz2tVf8mJi2fm40pdDLdlhyTilqfURDu0</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string description="Content description for an icon that appears in the title area of a dialog" name="icon_content_description">Dialog Icon</string>

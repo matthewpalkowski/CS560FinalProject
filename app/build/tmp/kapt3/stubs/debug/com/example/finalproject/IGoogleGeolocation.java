@@ -6,7 +6,7 @@ import java.lang.System;
 public abstract interface IGoogleGeolocation {
     
     @org.jetbrains.annotations.NotNull()
-    @retrofit2.http.POST(value = ".")
+    @retrofit2.http.POST(value = "json")
     public abstract retrofit2.Call<com.example.finalproject.GoogleGeocodeResults> getGeolocaiton(@org.jetbrains.annotations.NotNull()
     @retrofit2.http.Field(value = "address")
     java.lang.String address, @org.jetbrains.annotations.NotNull()
@@ -14,7 +14,7 @@ public abstract interface IGoogleGeolocation {
     java.lang.String key);
     
     @org.jetbrains.annotations.NotNull()
-    @retrofit2.http.POST(value = ".")
+    @retrofit2.http.POST(value = "json")
     public abstract retrofit2.Call<com.example.finalproject.GoogleGeocodeResults> getReverseGeolocation(@org.jetbrains.annotations.NotNull()
     @retrofit2.http.Field(value = "latlang")
     java.lang.String coodinates, @org.jetbrains.annotations.NotNull()

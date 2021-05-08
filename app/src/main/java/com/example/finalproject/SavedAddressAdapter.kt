@@ -29,7 +29,6 @@ class SavedAddressAdapter(private val addressList : List<SavedAddressItem>) :
         holder.txtStreetAddress.text = currentItem.address.streetAddress
         holder.txtCity.text = currentItem.address.city
         holder.txtState.text = currentItem.address.state
-        holder.txtZip.text = currentItem.address.zipCode
         holder.imgAddressThumbnail
         holder.itemView.setOnClickListener(ShortPressListener())
         holder.itemView.setOnLongClickListener(LongPressListener())

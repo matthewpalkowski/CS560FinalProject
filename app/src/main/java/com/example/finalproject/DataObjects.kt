@@ -3,8 +3,7 @@ package com.example.finalproject
 data class Address(
     val streetAddress: String,
     val city: String,
-    val state: String,
-    val zipCode: String)
+    val state: String)
 
 data class GoogleGeocodeResults(val results : List<GeocodeResult>, val status : String)
 
