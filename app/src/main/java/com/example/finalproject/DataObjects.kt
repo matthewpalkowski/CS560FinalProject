@@ -7,7 +7,7 @@ data class Address(
 
 data class GoogleGeocodeResults(val results : List<GeocodeResult>, val status : String)
 
-data class GeocodeResult(val formattedAddress : String, val geometry: GeocodeResultGeometry)
+data class GeocodeResult(val formatted_address : String, val geometry: GeocodeResultGeometry)
 
 data class GeocodeResultGeometry(val location : GeocodeLocation)
 

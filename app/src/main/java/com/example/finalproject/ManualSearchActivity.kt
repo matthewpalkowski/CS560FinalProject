@@ -51,7 +51,7 @@ class ManualSearchActivity : AppCompatActivity() {
     *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
     *  Use ViewModel (use fragments and view model within results) 1pt
     *  Use of SQLite database or Room Database or Remote Database Firebase (Maybe download FEMA data) 2 pt
-    *  Use of a RESTful HTTP API (API calls) 2 pt
+    *  !DONE! Use of a RESTful HTTP API (API calls) 2 pt
     *  Use Broadcast Receiver services 2 pt (Subscribe to changes in WIFI state - needs to be assigned dynamically - only check status when app is running)
     */
 
@@ -62,8 +62,6 @@ class ManualSearchActivity : AppCompatActivity() {
 
     /*FIXME - MISC
      *  -Need to fix padding on the TextInputs
-     *  -Delete ZIP since its not needed for the API calls
-     *  -State needs to be 2 letter abbreviation
      *  -Fix consequences of the fact that zip code was removed from the inputs and the Address data class
      */
 
@@ -131,12 +129,14 @@ class ManualSearchActivity : AppCompatActivity() {
         getGPSLocation()
     }
 
-    private fun generateQueryString(reverseGeo: Boolean) : String {
+    private fun generateQueryMap(gpsSearch : Boolean) : Map<String,String>{
+        val queryMap = HashMap<String,String>()
         val stringBuilder = StringBuilder()
-        if(reverseGeo) {
+        if(gpsSearch) {
             stringBuilder.append(currentLocation!!.latitude.toString())
             stringBuilder.append(",")
             stringBuilder.append(currentLocation!!.longitude.toString())
+            queryMap[getString(R.string.key_coordinates)] = stringBuilder.toString()
         }
         else{
             stringBuilder.append(currentAddress.streetAddress)
@@ -144,8 +144,10 @@ class ManualSearchActivity : AppCompatActivity() {
             stringBuilder.append(currentAddress.city)
             stringBuilder.append(" ")
             stringBuilder.append(currentAddress.state)
+            queryMap[getString(R.string.key_address)] = stringBuilder.toString()
         }
-        return stringBuilder.toString()
+        queryMap[getString(R.string.key_api_key)] = ApiKeys.GOOGLE_API_KEY
+        return queryMap
     }
 
     private fun generateWarningDialog(title : String, message : String){
@@ -157,57 +159,37 @@ class ManualSearchActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    //FIXME - extract out some of the internal functionality into private functions
-    //FIXME - failing to build the query
-    private fun getGeocode(reverseGeo : Boolean = false){
+    private fun getGeocode(gpsSearch: Boolean){
         val retrofit = Retrofit.Builder()
              .baseUrl(getString(R.string.google_geocoding_base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
-        val queryString = generateQueryString(reverseGeo)
-        if(reverseGeo){
-            googleGeolocationAPI.getReverseGeolocation(queryString,ApiKeys.GOOGLE_API_KEY)
-                .enqueue(object : Callback<GoogleGeocodeResults> {
+
+        val queryMap : Map<String,String> = generateQueryMap(gpsSearch)
+
+        googleGeolocationAPI.getGeocode(queryMap)
+                .enqueue(object : Callback<GoogleGeocodeResults>{
                     override fun onResponse(
-                        call: Call<GoogleGeocodeResults>,
-                        response: Response<GoogleGeocodeResults>
+                            call: Call<GoogleGeocodeResults>,
+                            response: Response<GoogleGeocodeResults>
                     ) {
-                        when(response.body()!!.status){
-                            getString(R.string.ok) -> {TODO("Not yet implemented")}
-                            getString(R.string.zero_results) -> generateWarningDialog(
-                                getString(R.string.alert_title_invalid_address),
-                                getString(R.string.alert_message_invalid_address))
-                            else -> generateWarningDialog(
-                                getString(R.string.alert_title_geocoding),
-                                getString(R.string.alert_message_geocoding))
+                        if(response.body()?.results.isNullOrEmpty())
+                            generateWarningDialog(
+                                    getString(R.string.alert_title_invalid_address),
+                                    getString(R.string.alert_message_invalid_address))
+                        else {
+                            //TODO review list of addresses and parse as required
+                            generateWarningDialog("Success","success")
                         }
                     }
 
                     override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
                         generateWarningDialog(
-                            getString(R.string.alert_title_geocoding),
-                            getString(R.string.alert_message_geocoding))
+                                getString(R.string.alert_title_geocoding),
+                                getString(R.string.alert_message_geocoding))
                     }
                 })
-        }
-        else{
-            googleGeolocationAPI.getGeolocaiton(queryString,ApiKeys.GOOGLE_API_KEY)
-                .enqueue(object : Callback<GoogleGeocodeResults>{
-                    override fun onResponse(
-                        call: Call<GoogleGeocodeResults>,
-                        response: Response<GoogleGeocodeResults>
-                    ) {
-                        TODO("Not yet implemented")
-                    }
-
-                    override fun onFailure(call: Call<GoogleGeocodeResults>, t: Throwable) {
-                        generateWarningDialog(
-                            getString(R.string.alert_title_geocoding),
-                            getString(R.string.alert_message_geocoding))
-                    }
-                })
-        }
     }
 
     @SuppressLint("MissingPermission")
@@ -293,6 +275,7 @@ class ManualSearchActivity : AppCompatActivity() {
     private inner class ButtonListener : View.OnClickListener {
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onClick(v: View?) {
+            var gpsSearch : Boolean = false
             if(v!! == findViewById(R.id.btnSearchAddress)) {
                 var valid = true
                 if (!validAddress()) valid = false
@@ -303,17 +286,20 @@ class ManualSearchActivity : AppCompatActivity() {
                         txtInputStreet.text.toString(),
                         txtInputCity.text.toString(),
                         spinnerState.selectedItem.toString())
-                    getGeocode()
-                    //TODO Add call to all the API functionality
                 }
             }
 
             else{
-                if(currentLocation == null) generateWarningDialog(getString(
+                if(currentLocation == null) {
+                    generateWarningDialog(getString(
                         R.string.alert_message_gps),
                         getString(R.string.alert_message_gps))
-                else getGeocode(true)
+                    return
+                }
+                gpsSearch = true
             }
+            getGeocode(gpsSearch)
+            //TODO Add call to all the API functionality
         }
     }
 
