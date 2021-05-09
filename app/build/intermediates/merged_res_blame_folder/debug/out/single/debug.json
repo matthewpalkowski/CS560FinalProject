@@ -32,10 +32,6 @@
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_manual_search_activity.xml.flat",
-        "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_manual_search_activity.xml"
-    },
-    {
         "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
@@ -76,6 +72,10 @@
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_search.xml.flat",
+        "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_search.xml"
+    },
+    {
         "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_loading.xml.flat",
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_loading.xml"
     },
@@ -94,9 +94,5 @@
     {
         "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_end_user_license.xml.flat",
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_end_user_license.xml"
-    },
-    {
-        "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_maps.xml.flat",
-        "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_maps.xml"
     }
 ]

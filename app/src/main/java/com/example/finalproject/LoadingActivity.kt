@@ -37,7 +37,7 @@ class LoadingActivity : AppCompatActivity() {
 
     private fun start(){
         Handler(Looper.getMainLooper()).postDelayed({
-            val myIntent = Intent(this, ManualSearchActivity::class.java)
+            val myIntent = Intent(this, SearchActivity::class.java)
             startActivity(myIntent)
             finish()
         }, 2000)

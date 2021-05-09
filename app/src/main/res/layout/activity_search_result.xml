@@ -29,52 +29,84 @@
         app:layout_constraintStart_toEndOf="@+id/imgAppIcon_SearchResult"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@+id/imgAppIcon_SearchResult"
-        tools:layout_editor_absoluteY="91dp"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="91dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="123dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="153dp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="187dp" />
-
     <Button
         android:id="@+id/btnSaveResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/blue"
-        android:text="Button"
-        tools:layout_editor_absoluteX="302dp"
-        tools:layout_editor_absoluteY="91dp" />
+        android:text="@string/btn_save"
+        app:layout_constraintStart_toStartOf="@+id/imgAppIcon_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/imgAppIcon_SearchResult" />
+
+    <ImageView
+        android:id="@+id/imgResultThumbNail"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/imgAppIcon_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/btnSaveResult"
+        tools:srcCompat="@drawable/no_image_available" />
+
+    <TextView
+        android:id="@+id/txtCity_SearchResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtStreetAddress_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/txtStreetAddress_SearchResult" />
+
+    <TextView
+        android:id="@+id/txtZip_SearchResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtState_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/txtCountry_SearchResult" />
+
+    <TextView
+        android:id="@+id/txtStreetAddress_SearchResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgResultThumbNail"
+        app:layout_constraintTop_toTopOf="@+id/imgResultThumbNail" />
+
+    <TextView
+        android:id="@+id/txtState_SearchResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtCity_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/txtCity_SearchResult" />
+
+    <TextView
+        android:id="@+id/txtCountry_SearchResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtState_SearchResult"
+        app:layout_constraintTop_toBottomOf="@+id/txtState_SearchResult" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
