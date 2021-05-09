@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -60,11 +61,6 @@ class ManualSearchActivity : AppCompatActivity() {
     *   ----------
     */
 
-    /*FIXME - MISC
-     *  -Need to fix padding on the TextInputs
-     *  -Fix consequences of the fact that zip code was removed from the inputs and the Address data class
-     */
-
     /*TODO - Major Components
      *  -Set up Database on SQLlite or Firebase
      *      -Uses
@@ -75,8 +71,6 @@ class ManualSearchActivity : AppCompatActivity() {
      *  Implement Landscape modes and use fragments and ViewModel to support it
      */
 
-    private val GPS : String = "gps"
-    private val TOAST_TEXT : String = "GPS location found"
     private val UPDATE_TIME : Long = 0
     private val UPDATE_DIST : Float = 0F
     private val REQUEST_CODE : Int = 10
@@ -94,9 +88,11 @@ class ManualSearchActivity : AppCompatActivity() {
     private lateinit var touchListener : TouchListener
     private lateinit var focusListener: OnFocusListener
 
-    private lateinit var currentAddress : Address
+    private lateinit var currentAddress : GeoCodeSearchableAddress
+    private lateinit var resultAddress : Address
 
     private var currentLocation : Location? = null
+    private var currentGeocode : GeocodeResult? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +100,7 @@ class ManualSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manual_search_activity)
         supportActionBar!!.hide()
 
-        gpsButton = findViewById<Button>(R.id.btnCurrentAddressSearch)
+        gpsButton = findViewById(R.id.btnCurrentAddressSearch)
 
         val buttonListener = ButtonListener()
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(buttonListener)
@@ -129,6 +125,37 @@ class ManualSearchActivity : AppCompatActivity() {
         getGPSLocation()
     }
 
+    private fun parseAddress(){
+        val componentIt = currentGeocode!!.address_components.iterator()
+        var types : List<String>
+        var currentComponent : GeoCodeAddressComponent
+        var city = ""
+        var state = ""
+        var country = ""
+        var zip = ""
+        val streetAddressStringBuilder = StringBuilder()
+        while(componentIt.hasNext()) {
+            currentComponent = componentIt.next()
+            types = currentComponent.types
+            if (types.contains(getString(R.string.address_component_type_street_number)))
+                streetAddressStringBuilder.append(currentComponent.short_name)
+            else if (types.contains(getString(R.string.address_component_type_route))) {
+                streetAddressStringBuilder.append(" ")
+                streetAddressStringBuilder.append(currentComponent.short_name)
+            }
+            else if (types.contains(getString(R.string.address_component_type_locality)) ||
+                    types.contains(getString(R.string.address_component_type_sublocality)))
+                city = currentComponent.long_name
+            else if (types.contains(getString(R.string.address_component_type_state)))
+                state = currentComponent.long_name
+            else if (types.contains(getString(R.string.address_component_type_country)))
+                country = currentComponent.long_name
+            else if (types.contains(getString(R.string.address_component_type_zip)))
+                zip = currentComponent.long_name
+        }
+        resultAddress = Address(streetAddressStringBuilder.toString(), city, state, country,zip)
+    }
+
     private fun generateQueryMap(gpsSearch : Boolean) : Map<String,String>{
         val queryMap = HashMap<String,String>()
         val stringBuilder = StringBuilder()
@@ -150,6 +177,17 @@ class ManualSearchActivity : AppCompatActivity() {
         return queryMap
     }
 
+    private fun generateResultIntent() : Intent{
+        //TODO put the extras as required
+        val intent = Intent(this, SearchResult::class.java)
+        intent.putExtra(getString(R.string.key_address_street),resultAddress.streetAddress)
+        intent.putExtra(getString(R.string.key_address_city),resultAddress.city)
+        intent.putExtra(getString(R.string.key_address_state),resultAddress.state)
+        intent.putExtra(getString(R.string.key_address_country),resultAddress.country)
+        intent.putExtra(getString(R.string.key_address_zip),resultAddress.zipCode)
+        return intent
+    }
+
     private fun generateWarningDialog(title : String, message : String){
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
@@ -168,6 +206,9 @@ class ManualSearchActivity : AppCompatActivity() {
 
         val queryMap : Map<String,String> = generateQueryMap(gpsSearch)
 
+        /*Note: This is called synchronously because the address must be fully validated prior
+                to execution of other API calls.*/
+        //FIXME change to synchronous execute() call
         googleGeolocationAPI.getGeocode(queryMap)
                 .enqueue(object : Callback<GoogleGeocodeResults>{
                     override fun onResponse(
@@ -178,9 +219,19 @@ class ManualSearchActivity : AppCompatActivity() {
                             generateWarningDialog(
                                     getString(R.string.alert_title_invalid_address),
                                     getString(R.string.alert_message_invalid_address))
+
                         else {
-                            //TODO review list of addresses and parse as required
-                            generateWarningDialog("Success","success")
+                            //TODO check distances if gps search
+                            val resultIt : Iterator<GeocodeResult> = response.body()!!.results.iterator()
+                            var result : GeocodeResult
+                            while(resultIt.hasNext()){
+                                result = resultIt.next()
+                                if(result.types.contains(getString(R.string.street_address_type))){
+                                    currentGeocode = result
+                                    break
+                                }
+                            }
+                            parseAddress()
                         }
                     }
 
@@ -196,7 +247,7 @@ class ManualSearchActivity : AppCompatActivity() {
     private fun getGPSListenerResults(){
         val locManager = (getSystemService(LOCATION_SERVICE) as LocationManager)
         val locListener = GPSListener()
-        locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener) //Calls onLocationChanged() in GPS listener
+        locManager.requestLocationUpdates (getString(R.string.GPS),UPDATE_TIME,UPDATE_DIST,locListener) //Calls onLocationChanged() in GPS listener
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -254,7 +305,7 @@ class ManualSearchActivity : AppCompatActivity() {
         val previousLocation : Location? = currentLocation
         currentLocation = location
         if(previousLocation == null && currentLocation != null){
-            Toast.makeText(this,TOAST_TEXT,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,getString(R.string.toast_text_gps_found),Toast.LENGTH_SHORT).show()
             gpsButton.isEnabled = true
         }
     }
@@ -282,7 +333,7 @@ class ManualSearchActivity : AppCompatActivity() {
                 if (!validCity()) valid = false
                 if (!validState()) valid = false
                 if (valid) {
-                    currentAddress = Address(
+                    currentAddress = GeoCodeSearchableAddress(
                         txtInputStreet.text.toString(),
                         txtInputCity.text.toString(),
                         spinnerState.selectedItem.toString())
@@ -298,8 +349,19 @@ class ManualSearchActivity : AppCompatActivity() {
                 }
                 gpsSearch = true
             }
+
+            //FIXME HAVE TO PUT BELOW INTO AN ASYNC CALL
             getGeocode(gpsSearch)
-            //TODO Add call to all the API functionality
+            if(currentGeocode != null){
+                //TODO Add call to all the API functionality
+                val resultIntent = generateResultIntent()
+                startActivity(resultIntent)
+            }
+            else{
+                generateWarningDialog(
+                        getString(R.string.alert_title_no_street_address),
+                        getString(R.string.alert_message_no_street_address))
+            }
         }
     }
 

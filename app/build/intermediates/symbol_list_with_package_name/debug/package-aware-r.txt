@@ -2396,10 +2396,12 @@ string alert_message_geocoding
 string alert_message_gps
 string alert_message_gps_still_locating
 string alert_message_invalid_address
+string alert_message_no_street_address
 string alert_title_eula
 string alert_title_geocoding
 string alert_title_gps
 string alert_title_invalid_address
+string alert_title_no_street_address
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
@@ -2446,6 +2448,12 @@ string item_view_role_description
 string key_address
 string key_api_key
 string key_coordinates
+string key_geocode_result_city
+string key_geocode_result_country
+string key_geocode_result_state
+string key_geocode_result_street_address
+string key_geocode_result_zip
+string key_result_type
 string loading
 string material_clock_display_divider
 string material_clock_toggle_content_description
@@ -2514,6 +2522,7 @@ string search__current_address
 string search_address
 string search_menu_title
 string status_bar_notification_info_overflow
+string street_address_type
 string title
 string title_activity_maps
 string zero_results

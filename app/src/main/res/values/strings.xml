@@ -2,10 +2,18 @@
     <string name="app_name">FinalProject</string>
 
     <string name="address">Street Address</string>
+    <string name="address_component_type_country">country</string>
+    <string name="address_component_type_locality">locality</string>
+    <string name="address_component_type_route">route</string>
+    <string name="address_component_type_state">administrative_area_level_1</string>
+    <string name="address_component_type_street_number">street_number</string>
+    <string name="address_component_type_sublocality">sublocality</string>
+    <string name="address_component_type_zip">postal_code</string>
     <string name="alert_title_eula">WARNING</string>
     <string name="alert_title_geocoding">Unable to access geocoding service.</string>
     <string name="alert_title_gps">Unable to access GPS</string>
     <string name="alert_title_invalid_address">Invalid address</string>
+    <string name="alert_title_no_street_address">No street address found</string>
     <string name="alert_message_eula">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
         exit the application.</string>
@@ -17,6 +25,7 @@
         search.</string>
     <string name="alert_message_gps_still_locating">GPS was unable to be obtained. Please wait for use manual search.</string>
     <string name="alert_message_invalid_address">No results returned for entered address.</string>
+    <string name="alert_message_no_street_address">No street address found</string>
     <string name="google_geocoding_base_url">https://maps.googleapis.com/maps/api/geocode/</string>
     <string name="btn_accept">Accept</string>
     <string name="btn_search_address"><u>Search</u></string>
@@ -24,9 +33,21 @@
     <string name="confirm">Confirm</string>
     <string name="city">City</string>
     <string name="eula_acceptance">eula_acceptance</string>
+    <string name="GPS">GPS</string>
     <string name="key_address">address</string>
+    <string name="key_address_city">address_city</string>
+    <string name="key_address_country">address_country</string>
+    <string name="key_address_state">address_state</string>
+    <string name="key_address_street">address_street</string>
+    <string name="key_address_zip">address_zip</string>
     <string name="key_api_key">key</string>
     <string name="key_coordinates">latlng</string>
+    <string name="key_geocode_result_city">geocode_result_city</string>
+    <string name="key_geocode_result_country">geocode_result_country</string>
+    <string name="key_geocode_result_state">geocode_result_state</string>
+    <string name="key_geocode_result_street_address">geocode_result_street_number</string>
+    <string name="key_geocode_result_zip">geocode_result_zip</string>
+    <string name="key_result_type">location_type</string>
     <string name="loading">Loading</string>
     <string name="missing_city">City is required</string>
     <string name="missing_street">Street address is required</string>
@@ -37,9 +58,11 @@
     <string name="return_to_application">Return to application</string>
     <string name="saved_addresses">Saved Address</string>
     <string name="search_address">Search Address Manually</string>
-    <string name="search__current_address">Search Current Address</string>3
+    <string name="search__current_address">Search Current Address</string>
+    <string name="street_address_type">street_address</string>
     <string name="title">Home Evaluator</string>
     <string name="title_activity_maps">Map</string>
+    <string name="toast_text_gps_found">GPS location found</string>
     <string name="zero_results">ZERO_RESULTS</string>
     <string name="zip">Zip Code</string>
 
