@@ -2447,6 +2447,7 @@ string eula_acceptance
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string favorites_activity
 string google_geocoding_base_url
 string google_maps_key
 string hide_bottom_view_on_scroll_behavior
@@ -2461,6 +2462,7 @@ string key_geocode_result_state
 string key_geocode_result_street_address
 string key_geocode_result_zip
 string key_result_type
+string key_source_activity
 string loading
 string material_clock_display_divider
 string material_clock_toggle_content_description
@@ -2526,6 +2528,7 @@ string preferences_file
 string return_to_application
 string saved_addresses
 string search__current_address
+string search_activity
 string search_address
 string search_menu_title
 string status_bar_notification_info_overflow

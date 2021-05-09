@@ -3,7 +3,7 @@ package com.example.finalproject
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Address(
+    data class Address(
         val streetAddress: String?,
         val city: String?,
         val state: String?,
@@ -40,7 +40,6 @@ data class Address(
         }
     }
 }
-
 
 data class GeoCodeAddressComponent(
         val long_name : String,
