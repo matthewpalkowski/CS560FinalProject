@@ -136,7 +136,7 @@ class SearchActivity : AppCompatActivity() {
         intent.putExtra(
                 getString(R.string.key_source_activity),
                 getString(R.string.search_activity))
-        intent.putExtra(getString(R.string.key_address), resultAddress)
+        intent.putExtra(GlobalStrings.ADDRESS_KEY, resultAddress)
         return intent
     }
 

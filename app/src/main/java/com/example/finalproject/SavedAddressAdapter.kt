@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
         val txtCity : TextView = itemView.findViewById(R.id.txtCity)
         val txtState : TextView = itemView.findViewById(R.id.txtState)
         val txtCountryAndZip : TextView = itemView.findViewById(R.id.txtCountryAndZip)
+        lateinit var addressEntity : AddressEntity
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressHolder {
@@ -25,33 +27,45 @@ class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
         return AddressHolder(view)
     }
 
-    //FIXME needs to be changed to match the database objects, not SavedAddressItem
     override fun onBindViewHolder(holder: AddressHolder, position: Int) {
-        val currentItem = addressList[position]
-        holder.txtStreetAddress.text = currentItem.streetAddress
-        holder.txtCity.text = currentItem.city
-        holder.txtState.text = currentItem.state
+        holder.addressEntity = addressList[position]
+        holder.txtStreetAddress.text = holder.addressEntity.streetAddress
+        holder.txtCity.text = holder.addressEntity.city
+        holder.txtState.text = holder.addressEntity.state
 
         val stringBuilder = StringBuilder()
-        stringBuilder.append(currentItem.country)
+        stringBuilder.append(holder.addressEntity.country)
         stringBuilder.append(", ")
-        stringBuilder.append(currentItem.zip)
+        stringBuilder.append(holder.addressEntity.zip)
         holder.txtCountryAndZip.text = stringBuilder.toString()
 
         holder.imgAddressThumbnail
         holder.itemView.setOnClickListener(ShortPressListener())
         holder.itemView.setOnLongClickListener(LongPressListener())
 
-        if(!currentItem.imageURL.isNullOrBlank())
-            Picasso.get().load(currentItem.imageURL).into(holder.imgAddressThumbnail) //TODO Need places API connected - might store photos directly
+        if(!holder.addressEntity.imageURL.isNullOrBlank())
+            Picasso.get().load(holder.addressEntity.imageURL).into(holder.imgAddressThumbnail) //TODO Need places API connected - might store photos directly
         else holder.imgAddressThumbnail.setImageResource(R.drawable.no_image_available)
+    }
+
+    private fun generateAddress(holder : AddressHolder): Address{
+        val entity = holder.addressEntity
+        return Address(
+            entity.streetAddress,
+            entity.city,
+            entity.state,
+            entity.country,
+            entity.zip,
+        )
     }
 
     override fun getItemCount(): Int {return addressList.size}
 
-
     private fun OpenItem(v: View?) {
-        //TODO implement creation of intent to go to SearchResult with data from the selected item
+        val intent = Intent(v!!.context, SearchResultActivity::class.java) //FIXME probably need the parent context
+        val address = generateAddress(v!! as AddressHolder)
+        intent.putExtra(GlobalStrings.ADDRESS_KEY,address) //FIXME can't use the getString in this context
+        //TODO add other items as required (i.e. imageURL)
     }
 
     private fun RemoveItem(v: View?){

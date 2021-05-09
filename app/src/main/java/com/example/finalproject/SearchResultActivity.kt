@@ -13,8 +13,6 @@ import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
 
 class SearchResultActivity : AppCompatActivity() {
 
-    //TODO -add navigation to SavedAddresses
-
     private lateinit var txtCity : TextView
     private lateinit var txtCountry : TextView
     private lateinit var txtState: TextView
@@ -41,7 +39,7 @@ class SearchResultActivity : AppCompatActivity() {
 
     private fun populateResultData(){
         val intentExtras = intent.extras
-        val address = (intentExtras!!.get(getString(R.string.key_address)) as Address)
+        val address = (intentExtras?.get(GlobalStrings.ADDRESS_KEY) as Address)
         txtStreetAddress.text = address.streetAddress
         txtCity.text = address.city
         txtState.text = address.state
@@ -53,7 +51,7 @@ class SearchResultActivity : AppCompatActivity() {
     private fun saveResult(){
         Thread {
             val db = RoomDatabaseAddresses.getAddressDatabase(application)
-            val address = (intent.extras!!.get(getString(R.string.key_address)) as Address)
+            val address = (intent.extras!!.get(GlobalStrings.ADDRESS_KEY) as Address)
 
             val streetAddress : String = address.streetAddress ?: ""
             val city : String = address.city ?: ""
@@ -76,7 +74,7 @@ class SearchResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun getSavdAddressesIntent():Intent{
+    private fun getSavedAddressesIntent():Intent{
         return Intent(this,SavedAddressesActivity::class.java)
     }
 
@@ -85,7 +83,7 @@ class SearchResultActivity : AppCompatActivity() {
             if(v!! == findViewById(R.id.btnSaveResult))
                 saveResult()
             else
-                startActivity(getSavdAddressesIntent())
+                startActivity(getSavedAddressesIntent())
         }
     }
 }
