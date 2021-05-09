@@ -95,7 +95,6 @@ class SearchActivity : AppCompatActivity() {
     private var currentLocation : Location? = null
     private var currentGeocode : GeocodeResult? = null
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -224,7 +223,6 @@ class SearchActivity : AppCompatActivity() {
         locManager.requestLocationUpdates (GPS,UPDATE_TIME,UPDATE_DIST,locListener) //Calls onLocationChanged() in GPS listener
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun getGPSLocation(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
@@ -329,7 +327,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private inner class ButtonListener : View.OnClickListener {
-        @RequiresApi(Build.VERSION_CODES.M)
         override fun onClick(v: View?) {
             var gpsSearch = false
             if(v!! == findViewById(R.id.btnSearchAddress)) {

@@ -28,10 +28,6 @@
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
-    },
-    {
         "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
@@ -94,5 +90,9 @@
     {
         "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_end_user_license.xml.flat",
         "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\layout\\activity_end_user_license.xml"
+    },
+    {
+        "merged": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\biggm\\Desktop\\Homeworks\\FinalProject\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
     }
 ]

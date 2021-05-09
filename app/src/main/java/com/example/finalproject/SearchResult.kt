@@ -27,7 +27,7 @@ class SearchResult : AppCompatActivity() {
         txtState = findViewById(R.id.txtState_SearchResult)
         txtCountry = findViewById(R.id.txtCountry_SearchResult)
         txtZip = findViewById(R.id.txtZip_SearchResult)
-        addressThumbnail = findViewById(R.id.imgAddressThumnail)
+        addressThumbnail = findViewById(R.id.imgResultThumbNail)
         populateResultData()
     }
 
