@@ -1,5 +1,6 @@
 package com.example.finalproject
 
+import android.app.Application
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.databaseobjects.AddressEntity
+import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
 import com.squareup.picasso.Picasso
 
-class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
+class SavedAddressAdapter(private val addressList : MutableList<AddressEntity>) :
     RecyclerView.Adapter<SavedAddressAdapter.AddressHolder>() {
+
+    lateinit var applicationContext : Application
 
     class AddressHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imgAddressThumbnail: ImageView = itemView.findViewById(R.id.imgAddressThumnail)
@@ -24,6 +28,7 @@ class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.saved_address,parent,false)
+        applicationContext = parent.context.applicationContext as Application
         return AddressHolder(view)
     }
 
@@ -43,7 +48,7 @@ class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
         holder.itemView.setOnClickListener(ShortPressListener())
         holder.itemView.setOnLongClickListener(LongPressListener())
 
-        if(!holder.addressEntity.imageURL.isNullOrBlank())
+        if(holder.addressEntity.imageURL.isNotBlank())
             Picasso.get().load(holder.addressEntity.imageURL).into(holder.imgAddressThumbnail) //TODO Need places API connected - might store photos directly
         else holder.imgAddressThumbnail.setImageResource(R.drawable.no_image_available)
     }
@@ -55,32 +60,37 @@ class SavedAddressAdapter(private val addressList : List<AddressEntity>) :
             entity.city,
             entity.state,
             entity.country,
-            entity.zip,
-        )
+            entity.zip)
     }
 
     override fun getItemCount(): Int {return addressList.size}
 
-    private fun OpenItem(v: View?) {
+    private fun openItem(v: View?) {
         val intent = Intent(v!!.context, SearchResultActivity::class.java) //FIXME probably need the parent context
-        val address = generateAddress(v!! as AddressHolder)
-        intent.putExtra(GlobalStrings.ADDRESS_KEY,address) //FIXME can't use the getString in this context
+        val address = generateAddress(v as AddressHolder) //FIXME cannot cast as AddressHolder
+        intent.putExtra(GlobalStrings.ADDRESS_KEY,address)
         //TODO add other items as required (i.e. imageURL)
     }
 
-    private fun RemoveItem(v: View?){
-
+    private fun removeItem(v: View?){
+        val entity = (v!! as AddressHolder).addressEntity //FIXME cannot cast as AddressHolder
+        Thread{
+            val db = RoomDatabaseAddresses.getAddressDatabase(applicationContext)
+            db.contactDAO().deleteAddress(entity)
+        }.start()
+        addressList.remove(entity)
+        notifyDataSetChanged()
     }
 
     private inner class ShortPressListener : View.OnClickListener {
         override fun onClick(v: View?) {
-            OpenItem(v)
+            openItem(v)
         }
     }
 
     private inner class LongPressListener : View.OnLongClickListener {
         override fun onLongClick(v: View?): Boolean {
-            RemoveItem(v)
+            removeItem(v)
             return false
         }
     }

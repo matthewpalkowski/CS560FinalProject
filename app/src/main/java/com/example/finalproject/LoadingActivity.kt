@@ -15,6 +15,7 @@ class LoadingActivity : AppCompatActivity() {
     *           -use broadcast receiver listening for network status change
     *               -Change to connected creates toast message "Connection Established" and proceed
     *           -Ok exits app
+    *   -Add initialization of room connection here
     * */
 
     private val EULA_REQUEST_CODE = 577

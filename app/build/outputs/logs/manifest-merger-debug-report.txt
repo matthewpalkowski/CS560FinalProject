@@ -114,14 +114,14 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\bi
 		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:10:9-35
 	android:theme
 		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:15:9-50
-activity#com.example.finalproject.SearchResult
-ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:9-50
+activity#com.example.finalproject.SearchResultActivity
+ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:9-58
 	android:name
-		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:19-47
-activity#com.example.finalproject.SavedAddresses
-ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:9-52
+		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:19-55
+activity#com.example.finalproject.SavedAddressesActivity
+ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:9-60
 	android:name
-		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:19-49
+		ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:19-57
 activity#com.example.finalproject.EndUserLicenseActivity
 ADDED from C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:19:9-60
 	android:name

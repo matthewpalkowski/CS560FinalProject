@@ -2,6 +2,8 @@ package com.example.finalproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.databaseobjects.AddressEntity
@@ -9,23 +11,32 @@ import com.example.finalproject.databaseobjects.RoomDatabaseAddresses.Companion.
 
 class SavedAddressesActivity : AppCompatActivity() {
 
-    lateinit var adapter: SavedAddressAdapter
-    lateinit var savedAddresses : List<AddressEntity>
-    lateinit var recycler : RecyclerView
+    private lateinit var adapter: SavedAddressAdapter
+    private lateinit var recycler : RecyclerView
+    private lateinit var txtNoAddresses : TextView
+
+    private val savedAddresses = ArrayList<AddressEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_addresses)
+        supportActionBar!!.hide()
 
-        //FIXME - Threads are not happy =( they crash the program
         recycler = findViewById(R.id.recyclerSavedAddress)
-        recycler.layoutManager = LinearLayoutManager(this)
+        txtNoAddresses = findViewById(R.id.txtNoSavedAddresses)
 
         Thread {
-            savedAddresses = getAddressDatabase(application).contactDAO().viewAllAddresses()
+            savedAddresses.addAll(getAddressDatabase(application).contactDAO().viewAllAddresses())
+            runOnUiThread{
+                if(savedAddresses.isNullOrEmpty())
+                    recycler.visibility = View.INVISIBLE
+                else {
+                    txtNoAddresses.visibility = View.INVISIBLE
+                    recycler.layoutManager = LinearLayoutManager(this)
+                    adapter = SavedAddressAdapter(savedAddresses)
+                    recycler.adapter = adapter
+                }
+            }
         }.start()
-
-        adapter = SavedAddressAdapter(savedAddresses)
-        recycler.adapter = adapter
     }
 }

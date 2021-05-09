@@ -52,6 +52,7 @@
     <string name="missing_street">Street address is required</string>
     <string name="missing_state">Select a state</string>
     <string name="missing_zip">Zip code is required</string>
+    <string name="no_saved_addresses">No saved address</string>
     <string name="ok">OK</string>
     <string name="preferences_file">userSettings</string>
     <string name="return_to_application">Return to application</string>

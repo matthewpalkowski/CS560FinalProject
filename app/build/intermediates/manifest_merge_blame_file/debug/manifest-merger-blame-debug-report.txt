@@ -51,12 +51,12 @@
 31        android:testOnly="true"
 32        android:theme="@style/Theme.FinalProject" >
 32-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:15:9-50
-33        <activity android:name="com.example.finalproject.SearchResult" />
-33-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:9-50
-33-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:19-47
-34        <activity android:name="com.example.finalproject.SavedAddresses" />
-34-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:9-52
-34-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:19-49
+33        <activity android:name="com.example.finalproject.SearchResultActivity" />
+33-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:9-58
+33-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:17:19-55
+34        <activity android:name="com.example.finalproject.SavedAddressesActivity" />
+34-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:9-60
+34-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:18:19-57
 35        <activity android:name="com.example.finalproject.EndUserLicenseActivity" />
 35-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:19:9-60
 35-->C:\Users\biggm\Desktop\Homeworks\FinalProject\app\src\main\AndroidManifest.xml:19:19-57

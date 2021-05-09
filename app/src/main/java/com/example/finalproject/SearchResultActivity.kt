@@ -71,7 +71,7 @@ class SearchResultActivity : AppCompatActivity() {
             runOnUiThread{
                 Toast.makeText(this,getString(R.string.address_saved),Toast.LENGTH_SHORT).show()
             }
-        }
+        }.start()
     }
 
     private fun getSavedAddressesIntent():Intent{

@@ -30,8 +30,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/Theme.FinalProject" >
-        <activity android:name="com.example.finalproject.SearchResult" />
-        <activity android:name="com.example.finalproject.SavedAddresses" />
+        <activity android:name="com.example.finalproject.SearchResultActivity" />
+        <activity android:name="com.example.finalproject.SavedAddressesActivity" />
         <activity android:name="com.example.finalproject.EndUserLicenseActivity" />
         <activity android:name="com.example.finalproject.LoadingActivity" >
             <intent-filter>

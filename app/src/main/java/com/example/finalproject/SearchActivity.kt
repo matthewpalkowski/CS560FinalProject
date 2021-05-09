@@ -37,22 +37,11 @@ class SearchActivity : AppCompatActivity() {
     *  !DONE! Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
     *  !DONE! Use of an Android service that requires permissions (gps to grab current loc.) 1pt
     *  !DONE! Use of three or more Activities (3 activities see Activities) 1 pt
-    *  Use of Async tasks (TBD) 1 pt
+    *  !DONE! Use of Async tasks (Multi-threading for database operations and API calls) 1 pt
     *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
-    *  Use ViewModel (use fragments and view model within results) 1pt
-    *  !DONE! Use of SQLite database or Room Database or Remote Database Firebase (Maybe download FEMA data) 2 pt
+    *  !DONE! Use of SQLite database or Room Database or Remote Database Firebase (Saved Addresses) 2 pt
     *  !DONE! Use of a RESTful HTTP API (API calls) 2 pt
-    *  Use Broadcast Receiver services 2 pt (Subscribe to changes in WIFI state - needs to be assigned dynamically - only check status when app is running)
     */
-
-    /*TODO - Major Components
-     * -Connect to the following APIs
-     *      -(Air Quality) https://openaq.org/#/countries/US
-     *      -EPA flood data
-     *      -Other natural disaster style data
-     *      -Crime data
-     * -Implement Landscape modes and use fragments and ViewModel to support it
-     */
 
     private val GPS = "gps" //Cannot be moved to strings file due to unexplained crashes inside of getGPSLocation()
     private val UPDATE_TIME : Long = 0
@@ -153,6 +142,45 @@ class SearchActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    private fun getAdditionalAddressData(){
+        /*FIXME - use the following observer structure to control flow of multiple API calls after first call has finished.
+                            * val retrofit = Retrofit.Builder()
+                                .baseUrl("https://api.example.com/")
+                                .build()
+
+                                val backendApi = retrofit.create(MyBackendAPI::class.java)
+
+                                val requests = ArrayList<Observable<*>>()
+
+                                requests.add(backendApi.getUser())
+                                requests.add(backendApi.listPhotos())
+                                requests.add(backendApi.listFriends())
+
+                                Observable
+                                        .zip(requests) {
+                                            // do something with those results and emit new event
+                                            Any() // <-- Here we emit just new empty Object(), but you can emit anything
+                                        }
+                                        // Will be triggered if all requests will end successfully (4xx and 5xx also are successful requests too)
+                                        .subscribe({
+                                            //Do something on successful completion of all requests
+                                        }) {
+                                            //Do something on error completion of requests
+                                        }
+                            */
+
+        /*TODO API Calls for the following
+        *   -Streetview picture
+        *   -AirQualityAPI (https://openaq.org/#/countries/US)
+        *   -ElevationAPI
+        *   -WaterQualityAPI
+        *   -WaterLevelAPI
+        *   -EPA flood data
+        *   -Other natural disaster style data (fires, drought, hurricanes etc)
+        *   -Crime data
+        */
+    }
+
     private fun getAddressInfo(gpsSearch: Boolean){
         val retrofit = Retrofit.Builder()
              .baseUrl(getString(R.string.google_geocoding_base_url))
@@ -173,7 +201,6 @@ class SearchActivity : AppCompatActivity() {
                                     getString(R.string.alert_message_invalid_address))
 
                         else {
-                            //TODO check distances if gps search
                             val resultIt : Iterator<GeocodeResult> = response.body()!!.results.iterator()
                             var result : GeocodeResult
                             while(resultIt.hasNext()){
@@ -183,14 +210,9 @@ class SearchActivity : AppCompatActivity() {
                                     break
                                 }
                             }
-                            /*TODO API Calls for the following
-                            *   -Streetview picture
-                            *   -AirQualityAPI
-                            *   -ElevationAPI
-                            *   -WaterQualityAPI
-                            *   -WaterLevelAPI
-                            *  */
+
                             parseAddress()
+                            getAdditionalAddressData()
                             val resultIntent = generateResultIntent()
                             startActivity(resultIntent)
                         }

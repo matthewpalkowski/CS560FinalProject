@@ -2186,6 +2186,7 @@ id txtEULA
 id txtInputCity
 id txtInputStreetAddress
 id txtLoading
+id txtNoSavedAddresses
 id txtSaveAddresses
 id txtSearchAddress
 id txtSerachCurrentAddress
@@ -2454,7 +2455,6 @@ string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string favorites_activity
 string google_geocoding_base_url
-string google_maps_key
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
@@ -2523,6 +2523,7 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string no_saved_addresses
 string ok
 string password_toggle_content_description
 string path_password_eye
