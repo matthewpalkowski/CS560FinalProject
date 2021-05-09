@@ -64,5 +64,3 @@ data class GeoCodeSearchableAddress(
         val streetAddress: String,
         val city: String,
         val state: String)
-
-data class SavedAddressItem(val address: Address, val imgURL : String)

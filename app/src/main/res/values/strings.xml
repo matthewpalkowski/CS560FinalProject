@@ -9,6 +9,7 @@
     <string name="address_component_type_street_number">street_number</string>
     <string name="address_component_type_sublocality">sublocality</string>
     <string name="address_component_type_zip">postal_code</string>
+    <string name="address_saved">Address saved</string>
     <string name="alert_title_eula">WARNING</string>
     <string name="alert_title_geocoding">Unable to access geocoding service.</string>
     <string name="alert_title_gps">Unable to access GPS</string>
@@ -31,6 +32,7 @@
     <string name="btn_search_address"><u>Search</u></string>
     <string name="btn_reject">Reject</string>
     <string name="btn_save">Save</string>
+    <string name="btn_view">View</string>
     <string name="confirm">Confirm</string>
     <string name="city">City</string>
     <string name="eula_acceptance">eula_acceptance</string>
@@ -61,6 +63,7 @@
     <string name="title">Home Evaluator</string>
     <string name="title_activity_maps">Map</string>
     <string name="toast_text_gps_found">GPS location found</string>
+    <string name="view_saved_addresses">View saved addresses</string>
     <string name="zero_results">ZERO_RESULTS</string>
     <string name="zip">Zip Code</string>
 

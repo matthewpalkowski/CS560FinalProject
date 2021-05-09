@@ -130,4 +130,25 @@
         android:text="@string/btn_search_address"
         app:layout_constraintStart_toStartOf="@+id/txtSerachCurrentAddress"
         app:layout_constraintTop_toBottomOf="@+id/txtSerachCurrentAddress" />
+
+    <TextView
+        android:id="@+id/txtViewSavedAddresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/view_saved_addresses"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/btnSearchAddress"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchAddress" />
+
+    <Button
+        android:id="@+id/btnViewSavedAddresses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/btn_view"
+        app:layout_constraintStart_toStartOf="@+id/txtViewSavedAddresses"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewSavedAddresses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

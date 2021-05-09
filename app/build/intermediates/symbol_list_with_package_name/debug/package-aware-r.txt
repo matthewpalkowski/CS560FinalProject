@@ -1847,6 +1847,8 @@ id btnCurrentAddressSearch
 id btnReject
 id btnSaveResult
 id btnSearchAddress
+id btnViewSaved
+id btnViewSavedAddresses
 id buttonPanel
 id cache_measures
 id cancel_button
@@ -2178,6 +2180,7 @@ id transition_transform
 id triangle
 id txtCity
 id txtCity_SearchResult
+id txtCountryAndZip
 id txtCountry_SearchResult
 id txtEULA
 id txtInputCity
@@ -2194,7 +2197,7 @@ id txtTitle_Loading
 id txtTitle_ManualSearch
 id txtTitle_SavedFavorites
 id txtTitle_SavedFavorites2
-id txtZip
+id txtViewSavedAddresses
 id txtZip_SearchResult
 id unchecked
 id uniform
@@ -2397,6 +2400,7 @@ string address_component_type_state
 string address_component_type_street_number
 string address_component_type_sublocality
 string address_component_type_zip
+string address_saved
 string alert_message_eula
 string alert_message_geocoding
 string alert_message_gps
@@ -2416,6 +2420,7 @@ string btn_accept
 string btn_reject
 string btn_save
 string btn_search_address
+string btn_view
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -2536,6 +2541,7 @@ string street_address_type
 string title
 string title_activity_maps
 string toast_text_gps_found
+string view_saved_addresses
 string zero_results
 string zip
 style AlertDialog_AppCompat

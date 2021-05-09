@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -18,7 +17,6 @@ import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
@@ -35,15 +33,6 @@ import java.lang.StringBuilder
  */
 class SearchActivity : AppCompatActivity() {
 
-    /*TODO Project Goals
-     * -Connect to the following APIs
-     *      -EPA flood data
-     *      -Other natural disaster style data
-     *      -Crime data
-     *      -Address validation
-     * -Ability to save addresses to favorites
-     */
-
     /*TODO Requirements (8pts total needed)
     *  !DONE! Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
     *  !DONE! Use of an Android service that requires permissions (gps to grab current loc.) 1pt
@@ -51,24 +40,18 @@ class SearchActivity : AppCompatActivity() {
     *  Use of Async tasks (TBD) 1 pt
     *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
     *  Use ViewModel (use fragments and view model within results) 1pt
-    *  Use of SQLite database or Room Database or Remote Database Firebase (Maybe download FEMA data) 2 pt
+    *  !DONE! Use of SQLite database or Room Database or Remote Database Firebase (Maybe download FEMA data) 2 pt
     *  !DONE! Use of a RESTful HTTP API (API calls) 2 pt
     *  Use Broadcast Receiver services 2 pt (Subscribe to changes in WIFI state - needs to be assigned dynamically - only check status when app is running)
     */
 
-    /* FIXME APIs to Connect to
-    *   (Air Quality) https://openaq.org/#/countries/US
-    *   ----------
-    */
-
     /*TODO - Major Components
-     *  -Set up Database on SQLlite or Firebase
-     *      -Uses
-     *          -Saving of favorites to account for persistence across phones
-     *          -Storage of static data sets that can't be accessed via API
-     *              -Which data sets?
-     *  -Write API connections
-     *  Implement Landscape modes and use fragments and ViewModel to support it
+     * -Connect to the following APIs
+     *      -(Air Quality) https://openaq.org/#/countries/US
+     *      -EPA flood data
+     *      -Other natural disaster style data
+     *      -Crime data
+     * -Implement Landscape modes and use fragments and ViewModel to support it
      */
 
     private val GPS = "gps" //Cannot be moved to strings file due to unexplained crashes inside of getGPSLocation()
@@ -104,6 +87,7 @@ class SearchActivity : AppCompatActivity() {
 
         val buttonListener = ButtonListener()
         findViewById<Button>(R.id.btnSearchAddress).setOnClickListener(buttonListener)
+        findViewById<Button>(R.id.btnViewSavedAddresses).setOnClickListener(NavButtonListener())
         gpsButton.setOnClickListener(buttonListener)
         gpsButton.isEnabled = false
 
@@ -148,12 +132,16 @@ class SearchActivity : AppCompatActivity() {
 
     private fun generateResultIntent() : Intent{
         //TODO put the extras as required
-        val intent = Intent(this, SearchResult::class.java)
+        val intent = Intent(this, SearchResultActivity::class.java)
         intent.putExtra(
                 getString(R.string.key_source_activity),
                 getString(R.string.search_activity))
         intent.putExtra(getString(R.string.key_address), resultAddress)
         return intent
+    }
+
+    private fun generateSavedAddressIntent(): Intent{
+        return Intent(this,SavedAddressesActivity::class.java)
     }
 
     private fun generateWarningDialog(title : String, message : String){
@@ -353,6 +341,13 @@ class SearchActivity : AppCompatActivity() {
             }
             getAddressInfo(gpsSearch)
         }
+    }
+
+    private inner class NavButtonListener: View.OnClickListener {
+        override fun onClick(v: View?) {
+            startActivity(generateSavedAddressIntent())
+        }
+
     }
 
     private inner class OnFocusListener : View.OnFocusChangeListener {

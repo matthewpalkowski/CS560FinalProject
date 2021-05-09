@@ -14,8 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
 
-        <activity android:name=".SearchResult" />
-        <activity android:name=".SavedAddresses" />
+        <activity android:name=".SearchResultActivity" />
+        <activity android:name=".SavedAddressesActivity" />
         <activity android:name=".EndUserLicenseActivity" />
         <activity android:name=".LoadingActivity">
             <intent-filter>
