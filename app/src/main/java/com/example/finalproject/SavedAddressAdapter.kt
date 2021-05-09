@@ -42,6 +42,7 @@ class SavedAddressAdapter(private val addressList : List<SavedAddressItem>) :
 
 
     private fun OpenItem(v: View?) {
+
         //TODO implement creation of intent to go to SearchResult with data from the selected item
     }
 

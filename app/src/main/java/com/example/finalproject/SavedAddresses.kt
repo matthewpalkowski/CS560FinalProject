@@ -25,6 +25,4 @@ class SavedAddresses : AppCompatActivity() {
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(this)
     }
-
-    //TODO - add listeners to recycler items to create intent to SearchResult structured the same as the intent from SearchActivity
 }
