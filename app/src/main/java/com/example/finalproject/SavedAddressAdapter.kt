@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.databaseobjects.AddressEntity
 import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
@@ -31,12 +32,17 @@ class SavedAddressAdapter(private val addressList : MutableList<AddressEntity>) 
                     itemView.context,
                     SearchResultActivity::class.java)
                 val address = generateAddress(this)
-                intent.putExtra(GlobalStrings.ADDRESS_KEY, address)
+                intent.putExtra(this.itemView.context.getString(R.string.address), address)
                 this.itemView.context.startActivity(intent)
             }
 
             itemView.setOnLongClickListener {
                 removeItem(this)
+                Toast.makeText(
+                        this.itemView.context,
+                        this.itemView.context.getString(R.string.address_removed),
+                        Toast.LENGTH_SHORT)
+                        .show()
                 return@setOnLongClickListener false
             }
         }

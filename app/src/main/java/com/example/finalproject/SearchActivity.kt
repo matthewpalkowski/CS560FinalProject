@@ -33,6 +33,8 @@ import java.lang.StringBuilder
  */
 class SearchActivity : AppCompatActivity() {
 
+    //FIXME - Intent not passing properly on multiple searches - stuck on the first one
+
     private val GPS = "gps" //Cannot be moved to strings file due to unexplained crashes inside of getGPSLocation()
     private val UPDATE_TIME : Long = 0
     private val UPDATE_DIST : Float = 0F
@@ -115,7 +117,7 @@ class SearchActivity : AppCompatActivity() {
         intent.putExtra(
                 getString(R.string.key_source_activity),
                 getString(R.string.search_activity))
-        intent.putExtra(GlobalStrings.ADDRESS_KEY, resultAddress)
+        intent.putExtra(getString(R.string.address), resultAddress)
         return intent
     }
 

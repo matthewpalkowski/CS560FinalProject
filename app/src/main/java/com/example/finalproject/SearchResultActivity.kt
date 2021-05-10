@@ -13,6 +13,8 @@ import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
 
 class SearchResultActivity : AppCompatActivity() {
 
+    //FIXME Duplication checks not working
+
     private lateinit var txtCity : TextView
     private lateinit var txtCountry : TextView
     private lateinit var txtState: TextView
@@ -20,6 +22,7 @@ class SearchResultActivity : AppCompatActivity() {
     private lateinit var txtZip : TextView
 
     private lateinit var addressThumbnail : ImageView
+    private lateinit var listener: ButtonListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +37,14 @@ class SearchResultActivity : AppCompatActivity() {
         addressThumbnail = findViewById(R.id.imgResultThumbNail)
         populateResultData()
 
-        findViewById<Button>(R.id.btnSaveResult).setOnClickListener(ButtonListener())
+        listener = ButtonListener()
+        findViewById<Button>(R.id.btnSaveResult).setOnClickListener(listener)
+        findViewById<Button>(R.id.btnViewSaved).setOnClickListener(listener)
     }
 
     private fun populateResultData(){
         val intentExtras = intent.extras
-        val address = (intentExtras?.get(GlobalStrings.ADDRESS_KEY) as Address)
+        val address = (intentExtras?.get(getString(R.string.address)) as Address)
         txtStreetAddress.text = address.streetAddress
         txtCity.text = address.city
         txtState.text = address.state
@@ -51,7 +56,7 @@ class SearchResultActivity : AppCompatActivity() {
     private fun saveResult(){
         Thread {
             val db = RoomDatabaseAddresses.getAddressDatabase(application)
-            val address = (intent.extras!!.get(GlobalStrings.ADDRESS_KEY) as Address)
+            val address = (intent.extras!!.get(getString(R.string.address)) as Address)
 
             val streetAddress : String = address.streetAddress ?: ""
             val city : String = address.city ?: ""

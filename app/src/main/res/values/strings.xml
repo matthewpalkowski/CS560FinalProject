@@ -10,6 +10,7 @@
     <string name="address_component_type_sublocality">sublocality</string>
     <string name="address_component_type_zip">postal_code</string>
     <string name="address_saved">Address saved</string>
+    <string name="address_removed">Addressed removed</string>
     <string name="alert_title_eula">WARNING</string>
     <string name="alert_title_geocoding">Unable to access geocoding service.</string>
     <string name="alert_title_gps">Unable to access GPS</string>

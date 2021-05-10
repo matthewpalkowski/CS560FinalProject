@@ -1113,6 +1113,7 @@
     <string name="address_component_type_street_number">street_number</string>
     <string name="address_component_type_sublocality">sublocality</string>
     <string name="address_component_type_zip">postal_code</string>
+    <string name="address_removed">Addressed removed</string>
     <string name="address_saved">Address saved</string>
     <string name="alert_message_eula">If you do not accept the End-User Licence Agreement you will not be
         able to use this application. Press \"Return to Agreement\" to return, press \"Confirm\" to
