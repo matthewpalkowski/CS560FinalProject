@@ -1,17 +1,21 @@
 # Home Inspector Application
 
+## Author
+Matthew Palkowski
+https://github.com/matthewpalkowski/
+
 ## Application intent
 
-The homes we live in are some of the most fundemental parts of everyone's day to day life in the United States.
+The homes we live in are some of the most fundamental parts of everyone's day to day life in the United States.
 The places we live are a key factor in some of the most basic elements of our lives down to the water we drink, 
-the air we breathe, people and community we can engage with. Most similar applications avaialable only concern
-themselves with the immediate financials consideration around a peice of real-estate. While this financials 
+the air we breathe, people and community we can engage with. Most similar applications available only concern
+themselves with the immediate financial consideration around a piece of real-estate. While this financial 
 information is still important, it fails to take into account of the myriad of other important factors that 
-potential tennant out to concern themselves with when choosing where to live.
+potential tenant out to concern themselves with when choosing where to live.
 
-The goal of Home Inspector is to put the important information beyond just the financials of a given property
+The goal of Home Inspector is to put the important information beyond just the financial aspects of a given property
 directly at the user's fingertips. Home Inspector takes information from sources like the EPA to give the user
-access to the other risks a particular residence might pose to them beyond just the risk to thier wallet.
+access to the other risks a particular residence might pose to them beyond just the risk to their wallet.
 
 ## Application Requirements
 
@@ -31,3 +35,12 @@ class ApiKeys {
         const val GOOGLE_API_KEY: String = "|YOUR API KEY HERE|"
     }
 }
+
+## References
+
+"Learn how to call multiple APIs in Parallel and in sequence with the help of RxJava Operators". : TechUrTime :. https://www.youtube.com/watch?v=vGlyTgIdQQ0.
+CCSU - CS560 Lectures. Yusuf Albayram. https://ccsu.blackboard.com/webapps/blackboard/content/listContent.jsp?course_id=_57469_1&content_id=_1777319_1&mode=reset.
+CCSU - CS560 Class Examples. Yusuf Albayram. https://ccsu.blackboard.com/webapps/blackboard/content/listContent.jsp?course_id=_57469_1&content_id=_1777319_1&mode=reset.
+
+## API Endpoints
+GoogleGeocoding API - https://maps.googleapis.com/maps/api/geocode/.

@@ -28,15 +28,22 @@ class SavedAddressesActivity : AppCompatActivity() {
         Thread {
             savedAddresses.addAll(getAddressDatabase(application).contactDAO().viewAllAddresses())
             runOnUiThread{
-                if(savedAddresses.isNullOrEmpty())
-                    recycler.visibility = View.INVISIBLE
-                else {
-                    txtNoAddresses.visibility = View.INVISIBLE
-                    recycler.layoutManager = LinearLayoutManager(this)
-                    adapter = SavedAddressAdapter(savedAddresses)
-                    recycler.adapter = adapter
-                }
+                adapter = SavedAddressAdapter(savedAddresses)
+                recycler.adapter = adapter
+                manageVisibility()
             }
         }.start()
+    }
+
+    fun manageVisibility(){
+        if(savedAddresses.isNullOrEmpty()) {
+            recycler.visibility = View.INVISIBLE
+            txtNoAddresses.visibility = View.VISIBLE
+        }
+        else {
+            txtNoAddresses.visibility = View.INVISIBLE
+            recycler.visibility = View.VISIBLE
+            recycler.layoutManager = LinearLayoutManager(this)
+        }
     }
 }

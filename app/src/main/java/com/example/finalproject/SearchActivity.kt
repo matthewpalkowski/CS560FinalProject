@@ -33,16 +33,6 @@ import java.lang.StringBuilder
  */
 class SearchActivity : AppCompatActivity() {
 
-    /*TODO Requirements (8pts total needed)
-    *  !DONE! Use of SharedPreferences for data persistence (Save EULA -- save addresses) 1pt
-    *  !DONE! Use of an Android service that requires permissions (gps to grab current loc.) 1pt
-    *  !DONE! Use of three or more Activities (3 activities see Activities) 1 pt
-    *  !DONE! Use of Async tasks (Multi-threading for database operations and API calls) 1 pt
-    *  !Done! Use of RecyclerView with custom adapter and layout (addresses) 1pt
-    *  !DONE! Use of SQLite database or Room Database or Remote Database Firebase (Saved Addresses) 2 pt
-    *  !DONE! Use of a RESTful HTTP API (API calls) 2 pt
-    */
-
     private val GPS = "gps" //Cannot be moved to strings file due to unexplained crashes inside of getGPSLocation()
     private val UPDATE_TIME : Long = 0
     private val UPDATE_DIST : Float = 0F
