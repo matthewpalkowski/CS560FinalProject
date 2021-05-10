@@ -41,6 +41,10 @@ import android.os.Parcelable
     }
 }
 
+data class ElevationResult(val results: List<ElevationComponent>,val status: String)
+
+data class ElevationComponent(val elevation: Double)
+
 data class GeoCodeAddressComponent(
         val long_name : String,
         val short_name : String,

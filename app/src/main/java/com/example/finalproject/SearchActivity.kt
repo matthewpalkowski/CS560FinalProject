@@ -21,19 +21,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.StringBuilder
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 /**
  * @author Matthew Palkowski
  */
 class SearchActivity : AppCompatActivity() {
-
-    //FIXME - Intent not passing properly on multiple searches - stuck on the first one
 
     private val GPS = "gps" //Cannot be moved to strings file due to unexplained crashes inside of getGPSLocation()
     private val UPDATE_TIME : Long = 0
@@ -58,6 +60,13 @@ class SearchActivity : AppCompatActivity() {
 
     private var currentLocation : Location? = null
     private var currentGeocode : GeocodeResult? = null
+
+    private lateinit var elevationQueryMap: Map<String,String>
+    private lateinit var geoLocationQueryMap : Map<String, String>
+    private lateinit var streetViewQueryMap: Map<String,String>
+
+    private lateinit var retrofitGoogle : Retrofit
+    private lateinit var googleRequest : IGoogleAPICalls
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,14 +99,14 @@ class SearchActivity : AppCompatActivity() {
         getGPSLocation()
     }
 
-    private fun generateQueryMap(gpsSearch : Boolean) : Map<String,String>{
-        val queryMap = HashMap<String,String>()
+    private fun generateQueryMapGeo(gpsSearch : Boolean){
+        geoLocationQueryMap = HashMap()
         val stringBuilder = StringBuilder()
         if(gpsSearch) {
             stringBuilder.append(currentLocation!!.latitude.toString())
             stringBuilder.append(",")
             stringBuilder.append(currentLocation!!.longitude.toString())
-            queryMap[getString(R.string.key_coordinates)] = stringBuilder.toString()
+            (geoLocationQueryMap as HashMap)[getString(R.string.key_coordinates)] = stringBuilder.toString()
         }
         else{
             stringBuilder.append(currentAddress.streetAddress)
@@ -105,18 +114,35 @@ class SearchActivity : AppCompatActivity() {
             stringBuilder.append(currentAddress.city)
             stringBuilder.append(" ")
             stringBuilder.append(currentAddress.state)
-            queryMap[getString(R.string.key_address)] = stringBuilder.toString()
+            (geoLocationQueryMap as HashMap)[getString(R.string.key_address)] = stringBuilder.toString()
         }
-        queryMap[getString(R.string.key_api_key)] = ApiKeys.GOOGLE_API_KEY
-        return queryMap
+        (geoLocationQueryMap as HashMap)[getString(R.string.key_api_key)] = ApiKeys.GOOGLE_API_KEY
+    }
+
+    private fun generateQueryMapStreetView() {
+        streetViewQueryMap = HashMap()
+        val stringBuilder = StringBuilder()
+        stringBuilder.append(currentGeocode!!.geometry.location.lat.toString())
+        stringBuilder.append(",")
+        stringBuilder.append(currentGeocode!!.geometry.location.lat.toString())
+        (streetViewQueryMap as HashMap)[getString(R.string.key_streetview_location)] = stringBuilder.toString()
+        (streetViewQueryMap as HashMap)[getString(R.string.key_streetview_size)] = getString(R.string.Key_streetview_size_value)
+        (streetViewQueryMap as HashMap)[getString(R.string.key_api_key)] = ApiKeys.GOOGLE_API_KEY
+    }
+
+    private fun generateQueryElevation(){
+        elevationQueryMap = HashMap()
+        val stringBuilder = StringBuilder()
+        stringBuilder.append(currentGeocode!!.geometry.location.lat.toString())
+        stringBuilder.append(",")
+        stringBuilder.append(currentGeocode!!.geometry.location.lat.toString())
+        (streetViewQueryMap as HashMap)[getString(R.string.key_elevation_locations)] = stringBuilder.toString()
+        (streetViewQueryMap as HashMap)[getString(R.string.key_api_key)] = ApiKeys.GOOGLE_API_KEY
     }
 
     private fun generateResultIntent() : Intent{
         //TODO put the extras as required
         val intent = Intent(this, SearchResultActivity::class.java)
-        intent.putExtra(
-                getString(R.string.key_source_activity),
-                getString(R.string.search_activity))
         intent.putExtra(getString(R.string.address), resultAddress)
         return intent
     }
@@ -135,31 +161,35 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun getAdditionalAddressData(){
-        /*FIXME - use the following observer structure to control flow of multiple API calls after first call has finished.
-                            * val retrofit = Retrofit.Builder()
-                                .baseUrl("https://api.example.com/")
-                                .build()
+        val requests = ArrayList<Observable<*>>()
+        val googleRetrofitObservable = Retrofit.Builder()
+            .baseUrl(getString(R.string.google_api_base_url))
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build()
+        val googleAPIRXApiCalls = googleRetrofitObservable.create(IGoogleAPICalls::class.java)
+        generateQueryMapStreetView()
+        generateQueryElevation()
 
-                                val backendApi = retrofit.create(MyBackendAPI::class.java)
+        requests.add(googleAPIRXApiCalls.getElevation(elevationQueryMap))
+        //requests.add(googleAPIRXApiCalls.getStreetViewImage(streetViewQueryMap))
 
-                                val requests = ArrayList<Observable<*>>()
+        /*TODO
+            -Build the retrofit calls
+            -Add calls to request
+         */
 
-                                requests.add(backendApi.getUser())
-                                requests.add(backendApi.listPhotos())
-                                requests.add(backendApi.listFriends())
-
-                                Observable
-                                        .zip(requests) {
-                                            // do something with those results and emit new event
-                                            Any() // <-- Here we emit just new empty Object(), but you can emit anything
-                                        }
-                                        // Will be triggered if all requests will end successfully (4xx and 5xx also are successful requests too)
-                                        .subscribe({
-                                            //Do something on successful completion of all requests
-                                        }) {
-                                            //Do something on error completion of requests
-                                        }
-                            */
+        Observable.zip(requests){
+            Any() // <-- Here we emit just new empty Object(), but you can emit anything
+        }
+        // Will be triggered if all requests will end successfully (4xx and 5xx also are successful requests too)
+        .subscribe({
+            print("test")
+            //Do something on successful completion of all requests
+        }){
+            print("test")
+            //Do something on error completion of requests
+        }
 
         /*TODO API Calls for the following
         *   -Streetview picture
@@ -174,14 +204,15 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun getAddressInfo(gpsSearch: Boolean){
-        val retrofit = Retrofit.Builder()
-             .baseUrl(getString(R.string.google_geocoding_base_url))
+        retrofitGoogle = Retrofit.Builder()
+            .baseUrl(getString(R.string.google_api_base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val googleGeolocationAPI = retrofit.create(IGoogleGeolocation::class.java)
 
-        val queryMap : Map<String,String> = generateQueryMap(gpsSearch)
-        googleGeolocationAPI.getGeocode(queryMap)
+        googleRequest = retrofitGoogle.create(IGoogleAPICalls::class.java)
+
+        generateQueryMapGeo(gpsSearch)
+        googleRequest.getGeocode(geoLocationQueryMap)
                 .enqueue(object : Callback<GoogleGeocodeResults>{
                     override fun onResponse(
                             call: Call<GoogleGeocodeResults>,
@@ -193,16 +224,7 @@ class SearchActivity : AppCompatActivity() {
                                     getString(R.string.alert_message_invalid_address))
 
                         else {
-                            val resultIt : Iterator<GeocodeResult> = response.body()!!.results.iterator()
-                            var result : GeocodeResult
-                            while(resultIt.hasNext()){
-                                result = resultIt.next()
-                                if(result.types.contains(getString(R.string.street_address_type))){
-                                    currentGeocode = result
-                                    break
-                                }
-                            }
-
+                            currentGeocode = response.body()!!.results[0]
                             parseAddress()
                             getAdditionalAddressData()
                             val resultIntent = generateResultIntent()
