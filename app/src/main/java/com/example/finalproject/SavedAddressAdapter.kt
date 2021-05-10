@@ -72,7 +72,7 @@ class SavedAddressAdapter(private val addressList : MutableList<AddressEntity>) 
         holder.imgAddressThumbnail
 
         if(holder.addressEntity.imageURL.isNotBlank())
-            Picasso.get().load(holder.addressEntity.imageURL).into(holder.imgAddressThumbnail) //TODO Need places API connected - might store photos directly
+            Picasso.get().load(holder.addressEntity.imageURL).into(holder.imgAddressThumbnail)
         else holder.imgAddressThumbnail.setImageResource(R.drawable.no_image_available)
     }
 

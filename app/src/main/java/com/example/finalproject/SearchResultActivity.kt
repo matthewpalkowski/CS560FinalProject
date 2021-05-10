@@ -99,9 +99,6 @@ class SearchResultActivity : AppCompatActivity() {
             val state : String = address.state ?: ""
             val country : String = address.country ?: ""
             val zip : String = address.zipCode ?:""
-
-            //FIXME - have to add URL somehow
-
             val newAddressEntity = AddressEntity(
                 id,
                 streetAddress,

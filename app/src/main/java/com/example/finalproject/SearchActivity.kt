@@ -154,6 +154,15 @@ class SearchActivity : AppCompatActivity() {
         intent.putExtra(getString(R.string.address), resultAddress)
         intent.putExtra(getString(R.string.key_image_url),generateImageURL())
 
+        /*TODO API Calls for the following
+        *   -AirQualityAPI (https://openaq.org/#/countries/US)
+        *   -WaterQualityAPI
+        *   -WaterLevelAPI
+        *   -EPA flood data
+        *   -Other natural disaster style data (fires, drought, hurricanes etc)
+        *   -Crime data
+        */
+
         val requests = ArrayList<Observable<*>>()
         val googleRetrofitObservable = Retrofit.Builder()
             .baseUrl(getString(R.string.google_api_base_url))
@@ -167,12 +176,7 @@ class SearchActivity : AppCompatActivity() {
         stringBuilder.append(",")
         stringBuilder.append(currentGeocode!!.geometry.location.lng.toString())
         requests.add(googleAPIRXApiCalls.getElevation(stringBuilder.toString(),ApiKeys.GOOGLE_API_KEY))
-//
-//        /*TODO
-//            -Build the retrofit calls
-//            -Add calls to request
-//         */
-//
+
         Observable.zip(requests){
             var currentItem : Int = 0
             val requestIt = it.iterator()
@@ -182,31 +186,15 @@ class SearchActivity : AppCompatActivity() {
                         intent.putExtra(
                                 getString(R.string.key_elevation),
                                 (it[currentItem] as ElevationResult).results[0].elevation)
-
-
-                    //TODO ADD TO INTENT AS EXTRA AND STORE IN DATABASE
                 }
                 currentItem++
             }
-                Any() // <-- Here we emit just new empty Object(), but you can emit anything
         }
-        // Will be triggered if all requests will end successfully (4xx and 5xx also are successful requests too)
         .subscribe({
             startActivity(intent)
         }){
             throw(it)
         }
-
-        /*TODO API Calls for the following
-        *   -Streetview picture
-        *   -AirQualityAPI (https://openaq.org/#/countries/US)
-        *   -ElevationAPI
-        *   -WaterQualityAPI
-        *   -WaterLevelAPI
-        *   -EPA flood data
-        *   -Other natural disaster style data (fires, drought, hurricanes etc)
-        *   -Crime data
-        */
     }
 
     private fun getAddressInfo(gpsSearch: Boolean){
