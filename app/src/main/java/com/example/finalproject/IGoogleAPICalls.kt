@@ -12,9 +12,9 @@ interface IGoogleAPICalls {
     @GET("geocode/json")
     fun getGeocode(@QueryMap(encoded = true) params : Map<String,String>) : Call<GoogleGeocodeResults>
 
-    @GET("streetview")
-    fun getStreetViewImage(@QueryMap(encoded = true) params: Map<String, String>) : Observable<String>
-
-    @GET("streetview")
-    fun getElevation(@QueryMap(encoded = true) params: Map<String, String>) : Observable<ElevationResult>
+    @GET("elevation/json")
+    fun getElevation(
+        @Query("locations") location: String,
+        @Query("key") key : String)
+        : Observable<ElevationResult>
 }

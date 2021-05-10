@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FinalProject</string>
 
+    <string name="additional_data">Additional Data</string>
     <string name="address">Street Address</string>
     <string name="address_component_type_country">country</string>
     <string name="address_component_type_locality">locality</string>
@@ -37,21 +38,22 @@
     <string name="btn_view">View</string>
     <string name="confirm">Confirm</string>
     <string name="city">City</string>
+    <string name="elevation">Elevation: </string>
+    <string name="elevation_suffix"> meters</string>
     <string name="eula_acceptance">eula_acceptance</string>
     <string name="favorites_activity">favorite_activity</string>
     <string name="key_address">address</string>
     <string name="key_api_key">key</string>
     <string name="key_coordinates">latlng</string>
+    <string name="key_elevation">elevation</string>
     <string name="key_elevation_locations">locations</string>
     <string name="key_geocode_result_city">geocode_result_city</string>
     <string name="key_geocode_result_country">geocode_result_country</string>
     <string name="key_geocode_result_state">geocode_result_state</string>
     <string name="key_geocode_result_street_address">geocode_result_street_number</string>
     <string name="key_geocode_result_zip">geocode_result_zip</string>
+    <string name="key_image_url">image_url</string>
     <string name="key_result_type">location_type</string>
-    <string name="key_streetview_location">location</string>
-    <string name="key_streetview_size">size</string>
-    <string name="Key_streetview_size_value">150x150</string>
     <string name="key_source_activity">source_activity</string>
     <string name="loading">Loading</string>
     <string name="missing_city">City is required</string>
@@ -59,6 +61,7 @@
     <string name="missing_state">Select a state</string>
     <string name="missing_zip">Zip code is required</string>
     <string name="no_saved_addresses">No saved address</string>
+    <string name="no_data_available">No data available</string>
     <string name="ok">OK</string>
     <string name="preferences_file">userSettings</string>
     <string name="return_to_application">Return to application</string>
@@ -67,6 +70,10 @@
     <string name="search_address">Search Address Manually</string>
     <string name="search__current_address">Search Current Address</string>
     <string name="street_address_type">street_address</string>
+    <string name="streetview_key">key=</string>
+    <string name="streetview_location">location=</string>
+    <string name="streetview_query">streetview?</string>
+    <string name="streetview_size">size=300x300</string>
     <string name="title">Home Evaluator</string>
     <string name="title_activity_maps">Map</string>
     <string name="toast_text_gps_found">GPS location found</string>

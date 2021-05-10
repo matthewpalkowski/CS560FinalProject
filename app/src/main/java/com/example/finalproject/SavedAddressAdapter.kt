@@ -32,7 +32,10 @@ class SavedAddressAdapter(private val addressList : MutableList<AddressEntity>) 
                     itemView.context,
                     SearchResultActivity::class.java)
                 val address = generateAddress(this)
-                intent.putExtra(this.itemView.context.getString(R.string.address), address)
+                val context =  this.itemView.context
+                intent.putExtra(context.getString(R.string.address), address)
+                intent.putExtra(context.getString(R.string.key_elevation),addressEntity.elevation)
+                intent.putExtra(context.getString(R.string.key_image_url), addressEntity.imageURL)
                 this.itemView.context.startActivity(intent)
             }
 

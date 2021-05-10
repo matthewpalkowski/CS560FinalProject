@@ -2153,6 +2153,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2183,6 +2184,7 @@ id txtCity_SearchResult
 id txtCountryAndZip
 id txtCountry_SearchResult
 id txtEULA
+id txtElevation
 id txtInputCity
 id txtInputStreetAddress
 id txtLoading
@@ -2366,7 +2368,6 @@ layout text_view_without_line_height
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
-string Key_streetview_size_value
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -2394,6 +2395,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string additional_data
 string address
 string address_component_type_country
 string address_component_type_locality
@@ -2450,6 +2452,8 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string confirm
+string elevation
+string elevation_suffix
 string end_user_license_agreement
 string error_icon_content_description
 string eula_acceptance
@@ -2464,16 +2468,16 @@ string item_view_role_description
 string key_address
 string key_api_key
 string key_coordinates
+string key_elevation
 string key_elevation_locations
 string key_geocode_result_city
 string key_geocode_result_country
 string key_geocode_result_state
 string key_geocode_result_street_address
 string key_geocode_result_zip
+string key_image_url
 string key_result_type
 string key_source_activity
-string key_streetview_location
-string key_streetview_size
 string loading
 string material_clock_display_divider
 string material_clock_toggle_content_description
@@ -2529,6 +2533,7 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string no_data_available
 string no_saved_addresses
 string ok
 string password_toggle_content_description
@@ -2545,6 +2550,10 @@ string search_address
 string search_menu_title
 string status_bar_notification_info_overflow
 string street_address_type
+string streetview_key
+string streetview_location
+string streetview_query
+string streetview_size
 string title
 string title_activity_maps
 string toast_text_gps_found

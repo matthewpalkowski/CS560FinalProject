@@ -29,7 +29,7 @@ public final class AddressDAO_Impl implements AddressDAO {
     this.__insertionAdapterOfAddressEntity = new EntityInsertionAdapter<AddressEntity>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `address_table` (`id`,`streetAddress`,`city`,`state`,`country`,`zip`,`imageURL`) VALUES (?,?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `address_table` (`id`,`streetAddress`,`city`,`state`,`country`,`zip`,`imageURL`,`elevation`) VALUES (?,?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -68,6 +68,11 @@ public final class AddressDAO_Impl implements AddressDAO {
           stmt.bindNull(7);
         } else {
           stmt.bindString(7, value.getImageURL());
+        }
+        if (value.getElevation() == null) {
+          stmt.bindNull(8);
+        } else {
+          stmt.bindString(8, value.getElevation());
         }
       }
     };
@@ -109,7 +114,7 @@ public final class AddressDAO_Impl implements AddressDAO {
     this.__updateAdapterOfAddressEntity = new EntityDeletionOrUpdateAdapter<AddressEntity>(__db) {
       @Override
       public String createQuery() {
-        return "UPDATE OR ABORT `address_table` SET `id` = ?,`streetAddress` = ?,`city` = ?,`state` = ?,`country` = ?,`zip` = ?,`imageURL` = ? WHERE `streetAddress` = ? AND `city` = ? AND `state` = ? AND `country` = ? AND `zip` = ?";
+        return "UPDATE OR ABORT `address_table` SET `id` = ?,`streetAddress` = ?,`city` = ?,`state` = ?,`country` = ?,`zip` = ?,`imageURL` = ?,`elevation` = ? WHERE `streetAddress` = ? AND `city` = ? AND `state` = ? AND `country` = ? AND `zip` = ?";
       }
 
       @Override
@@ -149,30 +154,35 @@ public final class AddressDAO_Impl implements AddressDAO {
         } else {
           stmt.bindString(7, value.getImageURL());
         }
-        if (value.getStreetAddress() == null) {
+        if (value.getElevation() == null) {
           stmt.bindNull(8);
         } else {
-          stmt.bindString(8, value.getStreetAddress());
+          stmt.bindString(8, value.getElevation());
         }
-        if (value.getCity() == null) {
+        if (value.getStreetAddress() == null) {
           stmt.bindNull(9);
         } else {
-          stmt.bindString(9, value.getCity());
+          stmt.bindString(9, value.getStreetAddress());
         }
-        if (value.getState() == null) {
+        if (value.getCity() == null) {
           stmt.bindNull(10);
         } else {
-          stmt.bindString(10, value.getState());
+          stmt.bindString(10, value.getCity());
         }
-        if (value.getCountry() == null) {
+        if (value.getState() == null) {
           stmt.bindNull(11);
         } else {
-          stmt.bindString(11, value.getCountry());
+          stmt.bindString(11, value.getState());
         }
-        if (value.getZip() == null) {
+        if (value.getCountry() == null) {
           stmt.bindNull(12);
         } else {
-          stmt.bindString(12, value.getZip());
+          stmt.bindString(12, value.getCountry());
+        }
+        if (value.getZip() == null) {
+          stmt.bindNull(13);
+        } else {
+          stmt.bindString(13, value.getZip());
         }
       }
     };
@@ -228,6 +238,7 @@ public final class AddressDAO_Impl implements AddressDAO {
       final int _cursorIndexOfCountry = CursorUtil.getColumnIndexOrThrow(_cursor, "country");
       final int _cursorIndexOfZip = CursorUtil.getColumnIndexOrThrow(_cursor, "zip");
       final int _cursorIndexOfImageURL = CursorUtil.getColumnIndexOrThrow(_cursor, "imageURL");
+      final int _cursorIndexOfElevation = CursorUtil.getColumnIndexOrThrow(_cursor, "elevation");
       final List<AddressEntity> _result = new ArrayList<AddressEntity>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final AddressEntity _item;
@@ -245,7 +256,9 @@ public final class AddressDAO_Impl implements AddressDAO {
         _tmpZip = _cursor.getString(_cursorIndexOfZip);
         final String _tmpImageURL;
         _tmpImageURL = _cursor.getString(_cursorIndexOfImageURL);
-        _item = new AddressEntity(_tmpId,_tmpStreetAddress,_tmpCity,_tmpState,_tmpCountry,_tmpZip,_tmpImageURL);
+        final String _tmpElevation;
+        _tmpElevation = _cursor.getString(_cursorIndexOfElevation);
+        _item = new AddressEntity(_tmpId,_tmpStreetAddress,_tmpCity,_tmpState,_tmpCountry,_tmpZip,_tmpImageURL,_tmpElevation);
         _result.add(_item);
       }
       return _result;
@@ -275,6 +288,7 @@ public final class AddressDAO_Impl implements AddressDAO {
       final int _cursorIndexOfCountry = CursorUtil.getColumnIndexOrThrow(_cursor, "country");
       final int _cursorIndexOfZip = CursorUtil.getColumnIndexOrThrow(_cursor, "zip");
       final int _cursorIndexOfImageURL = CursorUtil.getColumnIndexOrThrow(_cursor, "imageURL");
+      final int _cursorIndexOfElevation = CursorUtil.getColumnIndexOrThrow(_cursor, "elevation");
       final List<AddressEntity> _result = new ArrayList<AddressEntity>(_cursor.getCount());
       while(_cursor.moveToNext()) {
         final AddressEntity _item;
@@ -292,7 +306,9 @@ public final class AddressDAO_Impl implements AddressDAO {
         _tmpZip = _cursor.getString(_cursorIndexOfZip);
         final String _tmpImageURL;
         _tmpImageURL = _cursor.getString(_cursorIndexOfImageURL);
-        _item = new AddressEntity(_tmpId,_tmpStreetAddress,_tmpCity,_tmpState,_tmpCountry,_tmpZip,_tmpImageURL);
+        final String _tmpElevation;
+        _tmpElevation = _cursor.getString(_cursorIndexOfElevation);
+        _item = new AddressEntity(_tmpId,_tmpStreetAddress,_tmpCity,_tmpState,_tmpCountry,_tmpZip,_tmpImageURL,_tmpElevation);
         _result.add(_item);
       }
       return _result;
