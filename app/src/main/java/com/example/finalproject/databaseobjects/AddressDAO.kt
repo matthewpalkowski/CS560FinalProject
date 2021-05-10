@@ -17,5 +17,5 @@ interface AddressDAO {
     fun viewAllAddresses() : List<AddressEntity>
 
     @Query("SELECT * FROM address_table WHERE id LIKE:addressId")
-    fun getAddress(addressId: Int) : AddressEntity
+    fun getAddress(addressId: String) : List<AddressEntity>
 }

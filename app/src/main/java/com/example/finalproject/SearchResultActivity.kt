@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.finalproject.databaseobjects.AddressEntity
 import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
+import java.lang.StringBuilder
 
 class SearchResultActivity : AppCompatActivity() {
 
@@ -53,19 +54,33 @@ class SearchResultActivity : AppCompatActivity() {
         addressThumbnail.setImageResource(R.drawable.no_image_available)
     }
 
+    private fun generateId(address : Address): String{
+        val stringBuilder = StringBuilder()
+        stringBuilder.append(address.streetAddress ?: "")
+        stringBuilder.append(address.city ?: "")
+        stringBuilder.append(address.state ?: "")
+        stringBuilder.append(address.country ?: "")
+        stringBuilder.append(address.zipCode ?:"")
+        return stringBuilder.toString()
+    }
+
     private fun saveResult(){
         Thread {
+//            this.applicationContext.deleteDatabase("address_database")
             val db = RoomDatabaseAddresses.getAddressDatabase(application)
+
             val address = (intent.extras!!.get(getString(R.string.address)) as Address)
 
+            val id = generateId(address)
             val streetAddress : String = address.streetAddress ?: ""
             val city : String = address.city ?: ""
             val state : String = address.state ?: ""
             val country : String = address.country ?: ""
             val zip : String = address.zipCode ?:""
             //FIXME - have to add URL somehow
+            
             val newAddressEntity = AddressEntity(
-                0,
+                id,
                 streetAddress,
                 city,
                 state,
@@ -73,8 +88,8 @@ class SearchResultActivity : AppCompatActivity() {
                 zip,
                 "")
             db.contactDAO().insertAddress(newAddressEntity)
-            runOnUiThread{
-                Toast.makeText(this,getString(R.string.address_saved),Toast.LENGTH_SHORT).show()
+            runOnUiThread {
+                Toast.makeText(this, getString(R.string.address_saved), Toast.LENGTH_SHORT).show()
             }
         }.start()
     }

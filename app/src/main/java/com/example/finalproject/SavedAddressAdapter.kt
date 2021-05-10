@@ -46,7 +46,6 @@ class SavedAddressAdapter(private val addressList : MutableList<AddressEntity>) 
                 return@setOnLongClickListener false
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddressHolder {

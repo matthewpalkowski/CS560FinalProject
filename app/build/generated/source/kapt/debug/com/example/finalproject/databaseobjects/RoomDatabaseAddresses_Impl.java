@@ -30,9 +30,9 @@ public final class RoomDatabaseAddresses_Impl extends RoomDatabaseAddresses {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `address_table` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `streetAddress` TEXT NOT NULL, `city` TEXT NOT NULL, `state` TEXT NOT NULL, `country` TEXT NOT NULL, `zip` TEXT NOT NULL, `imageURL` TEXT NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `address_table` (`id` TEXT NOT NULL, `streetAddress` TEXT NOT NULL, `city` TEXT NOT NULL, `state` TEXT NOT NULL, `country` TEXT NOT NULL, `zip` TEXT NOT NULL, `imageURL` TEXT NOT NULL, PRIMARY KEY(`streetAddress`, `city`, `state`, `country`, `zip`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd236dc4396d7a0957867d631df675f4a')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7be2029a25f1b5849fb2f488a1ea588c')");
       }
 
       @Override
@@ -77,12 +77,12 @@ public final class RoomDatabaseAddresses_Impl extends RoomDatabaseAddresses {
       @Override
       protected RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
         final HashMap<String, TableInfo.Column> _columnsAddressTable = new HashMap<String, TableInfo.Column>(7);
-        _columnsAddressTable.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAddressTable.put("streetAddress", new TableInfo.Column("streetAddress", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAddressTable.put("city", new TableInfo.Column("city", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAddressTable.put("state", new TableInfo.Column("state", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAddressTable.put("country", new TableInfo.Column("country", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsAddressTable.put("zip", new TableInfo.Column("zip", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("id", new TableInfo.Column("id", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("streetAddress", new TableInfo.Column("streetAddress", "TEXT", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("city", new TableInfo.Column("city", "TEXT", true, 2, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("state", new TableInfo.Column("state", "TEXT", true, 3, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("country", new TableInfo.Column("country", "TEXT", true, 4, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsAddressTable.put("zip", new TableInfo.Column("zip", "TEXT", true, 5, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsAddressTable.put("imageURL", new TableInfo.Column("imageURL", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysAddressTable = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesAddressTable = new HashSet<TableInfo.Index>(0);
@@ -95,7 +95,7 @@ public final class RoomDatabaseAddresses_Impl extends RoomDatabaseAddresses {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "d236dc4396d7a0957867d631df675f4a", "b48ab13fa56c903190c6df3ca6768f00");
+    }, "7be2029a25f1b5849fb2f488a1ea588c", "5d44d826e4b841cfab9115fedd8b037c");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
