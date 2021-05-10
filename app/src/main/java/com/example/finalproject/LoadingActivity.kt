@@ -10,15 +10,6 @@ import com.example.finalproject.databaseobjects.RoomDatabaseAddresses
 
 class LoadingActivity : AppCompatActivity() {
 
-    /*TODO
-    *   -Check network connection
-    *       -if offline alert dialog
-    *           -use broadcast receiver listening for network status change
-    *               -Change to connected creates toast message "Connection Established" and proceed
-    *           -Ok exits app
-    *   -Add initialization of room connection here
-    * */
-
     private val EULA_REQUEST_CODE = 577
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -14,8 +14,6 @@ import java.lang.StringBuilder
 
 class SearchResultActivity : AppCompatActivity() {
 
-    //FIXME Duplication checks not working
-
     private lateinit var txtCity : TextView
     private lateinit var txtCountry : TextView
     private lateinit var txtState: TextView
@@ -78,7 +76,7 @@ class SearchResultActivity : AppCompatActivity() {
             val country : String = address.country ?: ""
             val zip : String = address.zipCode ?:""
             //FIXME - have to add URL somehow
-            
+
             val newAddressEntity = AddressEntity(
                 id,
                 streetAddress,
